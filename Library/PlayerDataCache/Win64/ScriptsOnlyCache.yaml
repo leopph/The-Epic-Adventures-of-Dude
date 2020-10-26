@@ -34,10 +34,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -76,35 +74,35 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11280}
+      Script: {instanceID: 11364}
     - Class: 114
-      Script: {instanceID: 11388}
+      Script: {instanceID: 11472}
     - Class: 114
-      Script: {instanceID: 11458}
+      Script: {instanceID: 11542}
     - Class: 114
-      Script: {instanceID: 11574}
+      Script: {instanceID: 11658}
     - Class: 114
-      Script: {instanceID: 11628}
+      Script: {instanceID: 11712}
     - Class: 114
-      Script: {instanceID: 11678}
+      Script: {instanceID: 11762}
     - Class: 114
-      Script: {instanceID: 12302}
+      Script: {instanceID: 12386}
     - Class: 114
-      Script: {instanceID: 12354}
+      Script: {instanceID: 12438}
     - Class: 114
-      Script: {instanceID: 13006}
+      Script: {instanceID: 13090}
     - Class: 114
-      Script: {instanceID: 13356}
+      Script: {instanceID: 13440}
     - Class: 114
-      Script: {instanceID: 13374}
+      Script: {instanceID: 13458}
     - Class: 114
-      Script: {instanceID: 13778}
+      Script: {instanceID: 13862}
     - Class: 114
-      Script: {instanceID: 13954}
+      Script: {instanceID: 14038}
     - Class: 114
-      Script: {instanceID: 14056}
+      Script: {instanceID: 14140}
     - Class: 114
-      Script: {instanceID: 14394}
+      Script: {instanceID: 14478}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -155,41 +153,41 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11280}
+      Script: {instanceID: 11364}
     - Class: 114
-      Script: {instanceID: 11574}
+      Script: {instanceID: 11658}
     - Class: 114
-      Script: {instanceID: 11628}
+      Script: {instanceID: 11712}
     - Class: 114
-      Script: {instanceID: 11906}
+      Script: {instanceID: 11990}
     - Class: 114
-      Script: {instanceID: 12048}
+      Script: {instanceID: 12132}
     - Class: 114
-      Script: {instanceID: 12068}
+      Script: {instanceID: 12152}
     - Class: 114
-      Script: {instanceID: 12260}
+      Script: {instanceID: 12344}
     - Class: 114
-      Script: {instanceID: 12302}
+      Script: {instanceID: 12386}
     - Class: 114
-      Script: {instanceID: 13006}
+      Script: {instanceID: 13090}
     - Class: 114
-      Script: {instanceID: 13078}
+      Script: {instanceID: 13162}
     - Class: 114
-      Script: {instanceID: 13140}
+      Script: {instanceID: 13224}
     - Class: 114
-      Script: {instanceID: 13418}
+      Script: {instanceID: 13502}
     - Class: 114
-      Script: {instanceID: 13624}
+      Script: {instanceID: 13708}
     - Class: 114
-      Script: {instanceID: 13688}
+      Script: {instanceID: 13772}
     - Class: 114
-      Script: {instanceID: 13778}
+      Script: {instanceID: 13862}
     - Class: 114
-      Script: {instanceID: 13832}
+      Script: {instanceID: 13916}
     - Class: 114
-      Script: {instanceID: 14072}
+      Script: {instanceID: 14156}
     - Class: 114
-      Script: {instanceID: 14394}
+      Script: {instanceID: 14478}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -801,4 +799,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/MainScene.unity
-  playerPath: E:/dev/EpicGame/bin/Epic Game.exe
+  playerPath: D:/Dev/EpicGame/bin/Epic Game.exe
