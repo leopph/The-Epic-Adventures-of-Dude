@@ -37,8 +37,9 @@ public class TreeMan : MonoBehaviour
     {
         Vector3 tmp = m_TextBoxRectTransform.position;
         m_FacingLeft = !m_FacingLeft;
-        transform.localScale = new Vector3(transform.localScale.x * - 1, transform.localScale.y, transform.localScale.z);
-        m_TextBoxRectTransform.localScale = new Vector3(m_TextBoxRectTransform.localScale.x * -1, m_TextBoxRectTransform.localScale.y, m_TextBoxRectTransform.localScale.z);
+
+        transform.localScale = Vector3.Reflect(transform.localScale, Vector3.left);
+        m_TextBoxRectTransform.localScale = Vector3.Reflect(m_TextBoxRectTransform.localScale, Vector3.left);
         m_TextBoxRectTransform.position = tmp;
     }
 }

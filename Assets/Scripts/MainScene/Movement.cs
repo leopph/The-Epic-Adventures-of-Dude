@@ -68,6 +68,6 @@ public class Movement : MonoBehaviour
     private void flip()
     {
         m_IsFacingRight = !m_IsFacingRight;
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        transform.localScale = Vector3.Reflect(transform.localScale, Vector3.left);
     }
 }

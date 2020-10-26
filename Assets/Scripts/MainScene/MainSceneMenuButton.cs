@@ -3,7 +3,7 @@
 
 public class MainSceneMenuButton : MonoBehaviour
 {
-    RectTransform m_RectTransform = null;
+    private RectTransform m_RectTransform = null;
 
 
     // Start is called before the first frame update
@@ -18,11 +18,13 @@ public class MainSceneMenuButton : MonoBehaviour
         m_RectTransform.anchoredPosition = new Vector2(Screen.width - m_RectTransform.rect.width, Screen.height - m_RectTransform.rect.height);
     }
 
+
     // Update button placement in case of window resize
     void OnGUI()
     {
         m_RectTransform.anchoredPosition = new Vector2(Screen.width - m_RectTransform.rect.width, Screen.height - m_RectTransform.rect.height);
     }
+
 
     // On click go back to main menu
     public void BackToMenu()
