@@ -35,7 +35,8 @@ public class Movement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        m_JumpCount = 0;
+        if (collision.GetContact(0).point.y < collision.otherCollider.bounds.min.y)
+            m_JumpCount = 0;
     }
 
 

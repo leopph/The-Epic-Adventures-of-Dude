@@ -22,7 +22,7 @@ public class Bow : MonoBehaviour
 
         for (int i = 0; i < m_AmmoPoolSize; i++)
         {
-            m_AmmoPool.Add(Instantiate(m_Ammo, transform.position, Quaternion.Euler(0, 0, 0)));
+            m_AmmoPool.Add(Instantiate(m_Ammo));
             m_AmmoPool[i].gameObject.SetActive(false);
         }
     }

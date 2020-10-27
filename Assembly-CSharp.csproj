@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\ButtonPositionDynamic.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuButtonManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuExitButton.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\MainMenuMuteButton.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuStartButton.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuVSyncButton.cs" />
     <Compile Include="Assets\Scripts\MainScene\Arm.cs" />
