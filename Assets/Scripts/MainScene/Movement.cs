@@ -48,9 +48,7 @@ public class Movement : MonoBehaviour
 
      private void move()
     {
-        float horiz = Input.GetAxis("Horizontal");
-
-        m_Body.velocity = new Vector2(horiz * m_Speed, m_Body.velocity.y);
+        m_Body.velocity = new Vector2(Input.GetAxis("Horizontal") * m_Speed, m_Body.velocity.y);
         m_Animator.SetFloat("Velocity[x]", Mathf.Abs(m_Body.velocity.x));
     }
 
@@ -58,7 +56,7 @@ public class Movement : MonoBehaviour
     private void jump()
     {
         if (m_JumpCount != 0)
-            m_Body.velocity = Vector2.zero;
+            m_Body.velocity = new Vector2(m_Body.velocity.x, 0);
 
         m_Body.AddForce(new Vector2(0, m_JumpForce), ForceMode2D.Impulse);
 
