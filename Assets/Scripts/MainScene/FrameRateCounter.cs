@@ -26,8 +26,8 @@ public class FrameRateCounter : MonoBehaviour
         {
             m_TimeSinceUpdate = 0f;
 
-            float frameTime = (float)System.Math.Round(Time.unscaledDeltaTime * 1000f, 2);
-            int FPS = Mathf.RoundToInt(1000f / frameTime);
+            int FPS = (int)(1f / Time.unscaledDeltaTime);
+            double frameTime = System.Math.Round(Time.unscaledDeltaTime * 1000.0, 2);
 
             m_Text.text = m_StringBuilder.Clear().Append("FPS: ").AppendLine(FPS.ToString()).Append("Frametime: ").Append(frameTime).Append(" ms").ToString();
         }

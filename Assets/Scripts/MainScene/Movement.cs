@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
     private Rigidbody2D m_Body;
     private Animator m_Animator;
     private byte m_JumpCount = 0;
+    private DashData m_DashData = new DashData();
     private bool m_IsFacingRight = false;
 
     public float m_Speed = 1.0f;
@@ -16,15 +17,18 @@ public class Movement : MonoBehaviour
     {
         m_Body = GetComponent<Rigidbody2D>();
         m_Animator = GetComponentInChildren<Animator>();
+
+        Time.fixedDeltaTime = 0.005f;
     }
 
 
     void Update()
     {
-        if ((Camera.main.WorldToScreenPoint(transform.position).x < Input.mousePosition.x && !m_IsFacingRight) || (Camera.main.WorldToScreenPoint(transform.position).x > Input.mousePosition.x && m_IsFacingRight))
+        if (!Dash())
+        {
+            move();
             flip();
-
-        move();
+        }
 
         if (Input.GetButtonDown("Jump") && m_JumpCount < 2)
             jump();
@@ -32,11 +36,62 @@ public class Movement : MonoBehaviour
         m_Animator.SetBool("Jumping", m_JumpCount > 0);
     }
 
+    private bool Dash()
+    { 
+        switch (m_DashData.state)
+        {
+            case DashData.DashState.Ready:
+                if (Input.GetKeyDown("left shift"))
+                {
+                    m_DashData.state = DashData.DashState.Dashing;
+                    m_DashData.originX = transform.position.x;
+                    m_DashData.targetX = transform.position.x + 5f * (m_IsFacingRight ? 1f : -1f);
+                    m_DashData.t = 0f;
+                    m_DashData.cooldown = 2f;
+
+                    m_Animator.SetBool("Dashing", true);
+                }
+
+                break;
+
+            case DashData.DashState.Cooldown:
+                if (m_DashData.cooldown > 0f)
+                    m_DashData.cooldown -= Time.deltaTime;
+
+                else
+                    m_DashData.state = DashData.DashState.Ready;
+              
+                break;
+
+            case DashData.DashState.Dashing:
+                m_DashData.t += Time.deltaTime / 0.2f;
+
+                transform.position = Vector3.Lerp(new Vector3(m_DashData.originX, transform.position.y, transform.position.z), new Vector3(m_DashData.targetX, transform.position.y, transform.position.z), m_DashData.t);
+                m_Body.velocity = Vector2.zero;
+
+                if (transform.position.x == m_DashData.targetX)
+                {
+                    m_DashData.state = DashData.DashState.Cooldown;
+                    m_Animator.SetBool("Dashing", false);
+                }
+
+                return true;
+        }
+
+        return false;
+    }
+
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.GetContact(0).point.y < collision.otherCollider.bounds.min.y)
             m_JumpCount = 0;
+
+        if (m_DashData.state == DashData.DashState.Dashing)
+        {
+            m_DashData.state = DashData.DashState.Cooldown;
+            m_Animator.SetBool("Dashing", false);
+        }
     }
 
 
@@ -66,7 +121,24 @@ public class Movement : MonoBehaviour
 
     private void flip()
     {
-        m_IsFacingRight = !m_IsFacingRight;
-        transform.localScale = Vector3.Reflect(transform.localScale, Vector3.left);
+        if ((Camera.main.WorldToScreenPoint(transform.position).x < Input.mousePosition.x && !m_IsFacingRight) || (Camera.main.WorldToScreenPoint(transform.position).x > Input.mousePosition.x && m_IsFacingRight))
+        {
+            m_IsFacingRight = !m_IsFacingRight;
+            transform.localScale = Vector3.Reflect(transform.localScale, Vector3.left);
+        }
+    }
+
+    struct DashData
+    {
+        public enum DashState
+        {
+            Dashing, Ready, Cooldown
+        }
+
+        public DashState state;
+        public float originX;
+        public float targetX;
+        public float t;
+        public float cooldown;
     }
 }
