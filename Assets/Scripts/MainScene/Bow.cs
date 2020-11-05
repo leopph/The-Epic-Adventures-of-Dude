@@ -14,7 +14,7 @@ public class Bow : MonoBehaviour
 
     void Start()
     {
-        transform.rotation = Quaternion.Euler(0, 0, 90);
+        transform.rotation = Quaternion.Euler(0, 0, -90);
         transform.position = transform.parent.position;
 
         m_Movement = GetComponentInParent<Movement>();
@@ -23,6 +23,7 @@ public class Bow : MonoBehaviour
         for (int i = 0; i < m_AmmoPoolSize; i++)
         {
             m_AmmoPool.Add(Instantiate(m_Ammo));
+            m_AmmoPool[i].transform.parent = transform;
             m_AmmoPool[i].gameObject.SetActive(false);
         }
     }

@@ -4,9 +4,7 @@ ScriptsOnlyBuild:
     - Arm
     - Bow
     - DespawnAmmo
-    - Enemy
     - FollowCamera
-    - FrameRateCounter
     - MainMenuButtonManager
     - MainMenuExitButton
     - MainMenuMuteButton
@@ -16,7 +14,6 @@ ScriptsOnlyBuild:
     - Movement
     - Parallaxer
     - Tiling
-    - TreeMan
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
@@ -35,9 +32,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimatorControllerTool
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -145,10 +143,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
-    - Class: 82
-      Script: {instanceID: 0}
-    - Class: 83
-      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -164,11 +158,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11906}
     - Class: 114
-      Script: {instanceID: 12050}
-    - Class: 114
       Script: {instanceID: 12070}
-    - Class: 114
-      Script: {instanceID: 12262}
     - Class: 114
       Script: {instanceID: 12304}
     - Class: 114
@@ -177,8 +167,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13080}
     - Class: 114
       Script: {instanceID: 13142}
-    - Class: 114
-      Script: {instanceID: 13420}
     - Class: 114
       Script: {instanceID: 13626}
     - Class: 114
@@ -704,7 +692,7 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
-      Hash: fbc22cceaa9e1762a684f595d3134880
+      Hash: a925f4ce287e0cec883db070f745a58a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Tiling
