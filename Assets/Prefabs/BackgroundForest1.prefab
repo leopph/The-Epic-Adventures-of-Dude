@@ -76,7 +76,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 61.439995, y: 20.489998}
+  m_Size: {x: 61.500057, y: 10.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -94,7 +94,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d12a5cd72ec13f46a3229b5c1473e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRandomizedX: 0
-  isRandomizedY: 0
+  m_IsRandomizedX: 0
+  m_MaxSpaceX: 1
+  m_IsRandomizedY: 0
+  m_MaxSpaceY: 1
   m_Sprites:
   - {fileID: 21300000, guid: 2764df013bf775744a807418d53a546f, type: 3}

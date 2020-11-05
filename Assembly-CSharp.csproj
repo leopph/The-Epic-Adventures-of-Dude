@@ -63,6 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\MainMenu.cs" />
+    <Compile Include="Assets\OptionsMenu.cs" />
     <Compile Include="Assets\Scripts\ButtonPositionDynamic.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuButtonManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuExitButton.cs" />
@@ -70,8 +72,8 @@
     <Compile Include="Assets\Scripts\MainMenu\MainMenuStartButton.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuVSyncButton.cs" />
     <Compile Include="Assets\Scripts\MainScene\Arm.cs" />
+    <Compile Include="Assets\Scripts\MainScene\Arrow.cs" />
     <Compile Include="Assets\Scripts\MainScene\Bow.cs" />
-    <Compile Include="Assets\Scripts\MainScene\DespawnAmmo.cs" />
     <Compile Include="Assets\Scripts\MainScene\Enemy.cs" />
     <Compile Include="Assets\Scripts\MainScene\FollowCamera.cs" />
     <Compile Include="Assets\Scripts\MainScene\FrameRateCounter.cs" />

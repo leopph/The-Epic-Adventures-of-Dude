@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 
 
 public class Tiling : MonoBehaviour
 {
-    public bool isRandomizedX = false;
-    public bool isRandomizedY = false;
+    public bool m_IsRandomizedX = false;
+    public float m_MaxSpaceX = 1f;
+    public bool m_IsRandomizedY = false;
+    public float m_MaxSpaceY = 2f;
     public Sprite[] m_Sprites;
 
     private SpriteRenderer m_SpriteRenderer;
@@ -43,11 +46,11 @@ public class Tiling : MonoBehaviour
             float offsetX = 0f;
             float offsetY = 0f;
 
-            if (isRandomizedX)
-                offsetX = leftSpawn ? -1f : 1f * Random.value;
+            if (m_IsRandomizedX)
+                offsetX = (leftSpawn ? -1f : 1f) * m_MaxSpaceX * Random.value;
 
-            if (isRandomizedY)
-                offsetY = 2f * (2f * Random.value - 1f);
+            if (m_IsRandomizedY)
+                offsetY = 2f * (m_MaxSpaceY * Random.value - m_MaxSpaceY / 2f);
 
             Vector3 position;
 
@@ -75,6 +78,7 @@ public class Tiling : MonoBehaviour
 
 
         /* OLD IMPLEMENTATION 
+         * 
         // left
         if (!m_Left && Camera.main.transform.position.x - m_CameraWidth / 2f <= transform.position.x - m_SpriteRenderer.sprite.bounds.extents.x / 2f)
         {
@@ -132,3 +136,20 @@ public class Tiling : MonoBehaviour
         m_SpriteRenderer.sprite =  m_Sprites[(int)((Random.value * m_Sprites.Length) % m_Sprites.Length)];
     }
 }
+
+/*[CustomEditor(typeof(Tiling))]
+public class TilingEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        Tiling tiling = target as Tiling;
+        tiling.m_IsRandomizedX = GUILayout.Toggle(tiling.m_IsRandomizedX, "isRandomizedX");
+        tiling.m_IsRandomizedY = GUILayout.Toggle(tiling.m_IsRandomizedY, "isRandomizedY");
+
+        if (tiling.m_IsRandomizedX)
+            tiling.m_MaxSpaceX = EditorGUILayout.FloatField("maxSpaceX", tiling.m_MaxSpaceX);
+
+        if (tiling.m_IsRandomizedY)
+            tiling.m_MaxSpaceY = EditorGUILayout.FloatField("maxSpaceY", tiling.m_MaxSpaceY);
+    }
+}*/
