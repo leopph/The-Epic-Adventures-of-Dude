@@ -4,6 +4,9 @@ ScriptsOnlyBuild:
     - Arm
     - Arrow
     - Bow
+    - CheckpointManager
+    - Enemy
+    - EnemySpawner
     - FollowCamera
     - FrameRateCounter
     - MainMenu
@@ -13,9 +16,9 @@ ScriptsOnlyBuild:
     - MainMenuStartButton
     - MainMenuVSyncButton
     - MainSceneMenuButton
-    - Movement
     - OptionsMenu
     - Parallaxer
+    - Player
     - Tiler
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
@@ -72,47 +75,47 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11280}
+      Script: {instanceID: 11292}
     - Class: 114
-      Script: {instanceID: 11388}
+      Script: {instanceID: 11400}
     - Class: 114
-      Script: {instanceID: 11442}
+      Script: {instanceID: 11454}
     - Class: 114
-      Script: {instanceID: 11460}
+      Script: {instanceID: 11472}
     - Class: 114
-      Script: {instanceID: 11576}
+      Script: {instanceID: 11588}
     - Class: 114
-      Script: {instanceID: 11630}
+      Script: {instanceID: 11642}
     - Class: 114
-      Script: {instanceID: 11680}
+      Script: {instanceID: 11692}
     - Class: 114
-      Script: {instanceID: 12016}
+      Script: {instanceID: 12028}
     - Class: 114
-      Script: {instanceID: 12306}
+      Script: {instanceID: 12318}
     - Class: 114
-      Script: {instanceID: 12358}
+      Script: {instanceID: 12370}
     - Class: 114
-      Script: {instanceID: 13010}
+      Script: {instanceID: 13022}
     - Class: 114
-      Script: {instanceID: 13360}
+      Script: {instanceID: 13372}
     - Class: 114
-      Script: {instanceID: 13378}
+      Script: {instanceID: 13390}
     - Class: 114
-      Script: {instanceID: 13678}
+      Script: {instanceID: 13690}
     - Class: 114
-      Script: {instanceID: 13782}
+      Script: {instanceID: 13794}
     - Class: 114
-      Script: {instanceID: 13960}
+      Script: {instanceID: 13972}
     - Class: 114
-      Script: {instanceID: 14062}
+      Script: {instanceID: 14074}
     - Class: 114
-      Script: {instanceID: 14234}
+      Script: {instanceID: 14246}
     - Class: 114
-      Script: {instanceID: 14274}
+      Script: {instanceID: 14286}
     - Class: 114
-      Script: {instanceID: 14402}
+      Script: {instanceID: 14414}
     - Class: 114
-      Script: {instanceID: 14444}
+      Script: {instanceID: 14456}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -163,37 +166,43 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11280}
+      Script: {instanceID: 11292}
     - Class: 114
-      Script: {instanceID: 11576}
+      Script: {instanceID: 11588}
     - Class: 114
-      Script: {instanceID: 11630}
+      Script: {instanceID: 11642}
     - Class: 114
-      Script: {instanceID: 11908}
+      Script: {instanceID: 11920}
     - Class: 114
-      Script: {instanceID: 12072}
+      Script: {instanceID: 12064}
     - Class: 114
-      Script: {instanceID: 12306}
+      Script: {instanceID: 12084}
     - Class: 114
-      Script: {instanceID: 13010}
+      Script: {instanceID: 12318}
     - Class: 114
-      Script: {instanceID: 13082}
+      Script: {instanceID: 13022}
     - Class: 114
-      Script: {instanceID: 13144}
+      Script: {instanceID: 13094}
     - Class: 114
-      Script: {instanceID: 13422}
+      Script: {instanceID: 13156}
     - Class: 114
-      Script: {instanceID: 13628}
+      Script: {instanceID: 13434}
     - Class: 114
-      Script: {instanceID: 13692}
+      Script: {instanceID: 13640}
     - Class: 114
-      Script: {instanceID: 13782}
+      Script: {instanceID: 13704}
     - Class: 114
-      Script: {instanceID: 13836}
+      Script: {instanceID: 13794}
     - Class: 114
       Script: {instanceID: 13848}
     - Class: 114
-      Script: {instanceID: 14402}
+      Script: {instanceID: 13860}
+    - Class: 114
+      Script: {instanceID: 14414}
+    - Class: 114
+      Script: {instanceID: 15904}
+    - Class: 114
+      Script: {instanceID: 20732}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -431,7 +440,7 @@ ScriptsOnlyBuild:
     className: MainMenuMuteButton
   - hash:
       serializedVersion: 2
-      Hash: c9e85a3db332ecf000a07c96fff576f1
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Enemy
@@ -531,12 +540,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SpriteAnimator
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ScaleBackGroundImage
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -656,7 +659,7 @@ ScriptsOnlyBuild:
       Hash: c2d6d03ff6d5d98cf3870fcd4e67b13c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: Movement
+    className: Player
   - hash:
       serializedVersion: 2
       Hash: 6939772cb3ce775a8e8d99f332534491
@@ -717,12 +720,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_StyleSheet
-  - hash:
-      serializedVersion: 2
-      Hash: 0d623f7bca6c3588308cd574b2e5d9ef
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Tiling
   - hash:
       serializedVersion: 2
       Hash: 8cd1cbba27f3cb1717254f668e9e0d5a
@@ -825,6 +822,18 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CheckpointManager
+  - hash:
+      serializedVersion: 2
+      Hash: b215c099bdf883e899f298a32bc5cfec
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemySpawner
   platform: 19
   scenePathNames:
   - Assets/Scenes/MainMenu.unity

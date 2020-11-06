@@ -63,28 +63,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\MainMenu.cs" />
-    <Compile Include="Assets\OptionsMenu.cs" />
+    <Compile Include="Assets\Scripts\Arm.cs" />
+    <Compile Include="Assets\Scripts\Arrow.cs" />
+    <Compile Include="Assets\Scripts\Bow.cs" />
     <Compile Include="Assets\Scripts\ButtonPositionDynamic.cs" />
+    <Compile Include="Assets\Scripts\CheckpointManager.cs" />
+    <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\EnemySpawner.cs" />
+    <Compile Include="Assets\Scripts\Entity.cs" />
+    <Compile Include="Assets\Scripts\FollowCamera.cs" />
+    <Compile Include="Assets\Scripts\FrameRateCounter.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\MainMenu.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuButtonManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuExitButton.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuMuteButton.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuStartButton.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuVSyncButton.cs" />
-    <Compile Include="Assets\Scripts\MainScene\Arm.cs" />
-    <Compile Include="Assets\Scripts\MainScene\Arrow.cs" />
-    <Compile Include="Assets\Scripts\MainScene\Bow.cs" />
-    <Compile Include="Assets\Scripts\MainScene\Enemy.cs" />
-    <Compile Include="Assets\Scripts\MainScene\FollowCamera.cs" />
-    <Compile Include="Assets\Scripts\MainScene\FrameRateCounter.cs" />
-    <Compile Include="Assets\Scripts\MainScene\MainSceneMenuButton.cs" />
-    <Compile Include="Assets\Scripts\MainScene\Movement.cs" />
-    <Compile Include="Assets\Scripts\MainScene\Parallaxer.cs" />
-    <Compile Include="Assets\Scripts\MainScene\Tiler.cs" />
-    <Compile Include="Assets\Scripts\MainScene\Tiling.cs" />
-    <Compile Include="Assets\Scripts\MainScene\TreeMan.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\OptionsMenu.cs" />
+    <Compile Include="Assets\Scripts\MainSceneMenuButton.cs" />
+    <Compile Include="Assets\Scripts\Parallaxer.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\RoomCamera.cs" />
-    <Compile Include="Assets\Scripts\ScaleBackGroundImage.cs" />
+    <Compile Include="Assets\Scripts\Tiler.cs" />
+    <Compile Include="Assets\Scripts\TreeMan.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
