@@ -6,7 +6,7 @@ public class Bow : MonoBehaviour
 {
     public Rigidbody2D m_Ammo = null;
     public float m_ProjectileSpeed = 75f;
-    public int m_AmmoPoolSize = 69;
+    public int m_AmmoPoolSize = 420;
 
     private List<Rigidbody2D> m_AmmoPool;
 
@@ -42,6 +42,7 @@ public class Bow : MonoBehaviour
         ammo.gameObject.SetActive(true);
         ammo.GetComponent<Rigidbody2D>().simulated = true;
         ammo.transform.parent = null;
+        ammo.transform.DetachChildren();
         ammo.transform.position = transform.position;
         ammo.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, direction));
         ammo.velocity = m_ProjectileSpeed * direction;

@@ -5,7 +5,7 @@
 
 public class Arrow : MonoBehaviour
 {
-    public float m_LifeTime = 5f;
+    public float m_LifeTime = 69f;
 
     private float m_TimeLeft = 0f;
     private Rigidbody2D m_Rigidbody;

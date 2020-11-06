@@ -12,6 +12,7 @@ public class Tiling : MonoBehaviour
     public float m_MaxSpaceY = 2f;
     public Sprite[] m_Sprites;
 
+    private GameObject m_Proto;
     private SpriteRenderer m_SpriteRenderer;
     private static float s_CameraWidth;
     private bool m_Left = false;
@@ -22,6 +23,12 @@ public class Tiling : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (m_Proto == null)
+        {
+            m_Proto = Instantiate(gameObject);
+            m_Proto.SetActive(false);
+        }
+
         m_SpriteRenderer = GetComponent<SpriteRenderer>();
 
         if (m_Sprites.Length == 0)
@@ -59,10 +66,13 @@ public class Tiling : MonoBehaviour
             else
                 position = transform.position + new Vector3(2f * m_SpriteRenderer.sprite.bounds.extents.x + offsetX, offsetY - m_OffsetY, 0);
 
-            GameObject tile = Instantiate(gameObject, position, transform.rotation);
+            GameObject tile = Instantiate(m_Proto, position, transform.rotation);
+            tile.SetActive(true);
             tile.transform.parent = transform.parent;
+
             Tiling tiling = tile.GetComponent<Tiling>();
             tiling.m_OffsetY = offsetY;
+            tiling.m_Proto = m_Proto;
 
             if (leftSpawn)
             {
@@ -75,59 +85,6 @@ public class Tiling : MonoBehaviour
                 tiling.m_Left = true;
             }
         }
-
-
-        /* OLD IMPLEMENTATION 
-         * 
-        // left
-        if (!m_Left && Camera.main.transform.position.x - m_CameraWidth / 2f <= transform.position.x - m_SpriteRenderer.sprite.bounds.extents.x / 2f)
-        {
-            float offsetX = 0f;
-            float offsetY = 0f;
-
-            if (isRandomizedX)
-                offsetX = -1f * Random.value;
-
-            if (isRandomizedY)
-                offsetY = 2f * (2f * Random.value - 1f);
-
-            Vector3 position = transform.position + new Vector3(-2f * m_SpriteRenderer.sprite.bounds.extents.x + offsetX, offsetY - m_OffsetY, 0);
-
-            GameObject tile = Instantiate(gameObject, position, transform.rotation);
-            tile.transform.localScale = Vector3.Reflect(tile.transform.localScale, Vector3.left);
-            tile.transform.parent = transform.parent;
-
-            Tiling tiling = tile.GetComponent<Tiling>();
-            
-            m_Left = true;
-            tiling.m_Right = true;
-            tiling.m_OffsetY = offsetY;
-
-        }
-        // right
-        else if (!m_Right && Camera.main.transform.position.x + m_CameraWidth / 2f >= transform.position.x + m_SpriteRenderer.sprite.bounds.extents.x / 2f)
-        {
-            float offsetX = 0f;
-            float offsetY = 0f;
-
-            if (isRandomizedX)
-                offsetX = Random.value;
-
-            if (isRandomizedY)
-                offsetY = 2f * (2f * Random.value - 1f);
-
-            Vector3 position = transform.position + new Vector3(2f * m_SpriteRenderer.sprite.bounds.extents.x + offsetX, offsetY - m_OffsetY, 0);
-
-            GameObject tile = Instantiate(gameObject, position, transform.rotation);
-            tile.transform.localScale = Vector3.Reflect(tile.transform.localScale, Vector3.left);
-            tile.transform.parent = transform.parent;
-
-            Tiling tiling = tile.GetComponent<Tiling>();
-
-            m_Right = true;
-            tiling.m_Left = true;
-            tiling.m_OffsetY = offsetY;
-        }*/
     }
 
 
@@ -136,20 +93,3 @@ public class Tiling : MonoBehaviour
         m_SpriteRenderer.sprite =  m_Sprites[(int)((Random.value * m_Sprites.Length) % m_Sprites.Length)];
     }
 }
-
-/*[CustomEditor(typeof(Tiling))]
-public class TilingEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        Tiling tiling = target as Tiling;
-        tiling.m_IsRandomizedX = GUILayout.Toggle(tiling.m_IsRandomizedX, "isRandomizedX");
-        tiling.m_IsRandomizedY = GUILayout.Toggle(tiling.m_IsRandomizedY, "isRandomizedY");
-
-        if (tiling.m_IsRandomizedX)
-            tiling.m_MaxSpaceX = EditorGUILayout.FloatField("maxSpaceX", tiling.m_MaxSpaceX);
-
-        if (tiling.m_IsRandomizedY)
-            tiling.m_MaxSpaceY = EditorGUILayout.FloatField("maxSpaceY", tiling.m_MaxSpaceY);
-    }
-}*/

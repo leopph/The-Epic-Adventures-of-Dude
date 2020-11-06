@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\MainScene\MainSceneMenuButton.cs" />
     <Compile Include="Assets\Scripts\MainScene\Movement.cs" />
     <Compile Include="Assets\Scripts\MainScene\Parallaxer.cs" />
+    <Compile Include="Assets\Scripts\MainScene\Tiler.cs" />
     <Compile Include="Assets\Scripts\MainScene\Tiling.cs" />
     <Compile Include="Assets\Scripts\MainScene\TreeMan.cs" />
     <Compile Include="Assets\Scripts\RoomCamera.cs" />
