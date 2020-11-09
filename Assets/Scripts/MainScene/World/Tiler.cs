@@ -89,6 +89,15 @@ public class Tiler : MonoBehaviour
     }
 
 
+    public TilingLayer GetLayer(int index) { return m_TilingLayers[index]; }
+
+    public void SetLayer(int index, TilingLayer layer)
+    {
+        if (index < m_TilingLayers.Length)
+            m_TilingLayers[index] = layer;
+    }
+
+
     [Serializable]
     public struct TilingLayer
     {

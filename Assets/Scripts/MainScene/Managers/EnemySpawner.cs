@@ -104,7 +104,10 @@ public class EnemySpawner : GameManager
     }
 
 
-    enum SpawnerState
+    public SpawnerState State() { return m_State; }
+
+
+    public enum SpawnerState
     {
         Sleeping,
         Spawning,

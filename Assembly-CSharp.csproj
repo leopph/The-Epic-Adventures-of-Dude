@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\MainMenu\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\MainScene\Arm.cs" />
     <Compile Include="Assets\Scripts\MainScene\Checkpoint.cs" />
+    <Compile Include="Assets\Scripts\MainScene\DeathZone.cs" />
     <Compile Include="Assets\Scripts\MainScene\Entities\Enemy.cs" />
     <Compile Include="Assets\Scripts\MainScene\Entities\Entity.cs" />
     <Compile Include="Assets\Scripts\MainScene\Entities\Player.cs" />
@@ -75,8 +76,10 @@
     <Compile Include="Assets\Scripts\MainScene\HUD\FrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\MainScene\HUD\HUD.cs" />
     <Compile Include="Assets\Scripts\MainScene\Managers\CheckpointManager.cs" />
+    <Compile Include="Assets\Scripts\MainScene\Managers\CombatArea.cs" />
     <Compile Include="Assets\Scripts\MainScene\Managers\EnemySpawner.cs" />
     <Compile Include="Assets\Scripts\MainScene\Managers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\MainScene\Managers\ParkourZone.cs" />
     <Compile Include="Assets\Scripts\MainScene\Managers\TriggerZone.cs" />
     <Compile Include="Assets\Scripts\MainScene\RoomCamera.cs" />
     <Compile Include="Assets\Scripts\MainScene\TreeMan.cs" />

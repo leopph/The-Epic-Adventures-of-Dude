@@ -6,10 +6,10 @@ public class TriggerZone : GameManager
     public GameObject[] m_Objects;
     public float m_Range;
 
-    private Transform m_Player;
+    protected Transform m_Player;
 
 
-    private void Start()
+    protected virtual void Start()
     {
         m_CheckpointManager.Register(this);
         m_Player = GameObject.FindWithTag("Player").transform;
@@ -17,15 +17,21 @@ public class TriggerZone : GameManager
 
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (m_Player.position.x >= transform.position.x)
+        if (PlayerInZone())
         {
             foreach (GameObject gameObject in m_Objects)
                 gameObject.SetActive(true);
 
             m_CheckpointManager.QueueForRemoval(this);
         }
+    }
+
+
+    protected bool PlayerInZone()
+    {
+        return m_Player.position.x >= transform.position.x && m_Player.position.x <= transform.position.x + m_Range;
     }
 
 
