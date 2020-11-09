@@ -2,19 +2,24 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class OptionsMenu : MonoBehaviour
 {
-    TextMeshProUGUI m_VSyncText;
     Slider m_VolumeSlider;
+    TextMeshProUGUI m_VSyncText;
+    TextMeshProUGUI m_FPSText;
 
 
     private void Start()
     {
+        m_VolumeSlider = GameObject.Find("VolumeSlider").GetComponent<Slider>();
+        m_VolumeSlider.value = AudioListener.volume;
+
         m_VSyncText = GameObject.Find("VSyncButton").GetComponentInChildren<TextMeshProUGUI>();
         m_VSyncText.text = "VSYNC: " + (QualitySettings.vSyncCount == 1 ? "ON" : QualitySettings.vSyncCount == 0 ? "OFF" : "ERROR");
 
-        m_VolumeSlider = GameObject.Find("VolumeSlider").GetComponent<Slider>();
-        m_VolumeSlider.value = AudioListener.volume;
+        m_FPSText = GameObject.Find("FPSButton").GetComponentInChildren<TextMeshProUGUI>();
+        m_FPSText.text = "FRAMERATE COUNTER: " + (FrameRateCounter.m_IsEnabled ? "ON" : "OFF");
     }
 
 
@@ -33,5 +38,13 @@ public class OptionsMenu : MonoBehaviour
             QualitySettings.vSyncCount = 0;
 
         m_VSyncText.text = "VSYNC: " + (QualitySettings.vSyncCount == 1 ? "ON" : QualitySettings.vSyncCount == 0 ? "OFF" : "ERROR");
+    }
+
+
+    public void SetFPSCounter()
+    {
+        FrameRateCounter.m_IsEnabled = !FrameRateCounter.m_IsEnabled;
+
+        m_FPSText.text = "FRAMERATE COUNTER: " + (FrameRateCounter.m_IsEnabled ? "ON" : "OFF");
     }
 }
