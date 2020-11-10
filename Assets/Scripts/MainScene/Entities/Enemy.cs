@@ -4,7 +4,7 @@
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider))]
-[RequireComponent(typeof(SpriteRenderer))]
+//[RequireComponent(typeof(SpriteRenderer))]
 
 
 public class Enemy : Entity

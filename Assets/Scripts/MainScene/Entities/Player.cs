@@ -23,7 +23,6 @@ public class Player : Entity
 
         m_Body = GetComponent<Rigidbody2D>();
         m_Animator = GetComponentInChildren<Animator>();
-        //m_CheckpointManager = GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>();
     }
 
 

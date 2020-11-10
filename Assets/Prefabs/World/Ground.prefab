@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1072501077116098725}
   - component: {fileID: 7611529942766783006}
-  - component: {fileID: 595859869698831279}
+  - component: {fileID: 7442409235258935415}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &595859869698831279
+--- !u!68 &7442409235258935415
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,5 +98,5 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -2, y: 0.375}
-  - {x: 2, y: 0.375}
+  - {x: -2, y: 0.37}
+  - {x: 2, y: 0.37}
