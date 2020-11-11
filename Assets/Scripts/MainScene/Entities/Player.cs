@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -11,7 +12,9 @@ public class Player : Entity
     private byte m_JumpCount = 0;
     private DashData m_DashData = new DashData();
 
-    private Collision2D m_LastOtherCollision;
+    private float move = 0;
+
+    private ContactPoint2D[] m_ContactPoints = new ContactPoint2D[2];
 
     public float m_Speed = 1.0f;
     public float m_JumpForce = 1.0f;
@@ -38,7 +41,8 @@ public class Player : Entity
 
         if (!Dash())
         {
-            move();
+            move = Input.GetAxis("Horizontal");
+            m_Animator.SetFloat("Velocity[x]", Mathf.Abs(m_Body.velocity.x));
             flip();
         }
 
@@ -46,6 +50,12 @@ public class Player : Entity
             jump();
 
         m_Animator.SetBool("Jumping", m_JumpCount > 0);
+    }
+
+
+    private void FixedUpdate()
+    {
+        m_Body.velocity = new Vector2(move * m_Speed, m_Body.velocity.y);
     }
 
 
@@ -88,7 +98,7 @@ public class Player : Entity
                 transform.position = Vector3.Lerp(new Vector3(m_DashData.originX, transform.position.y, transform.position.z), new Vector3(m_DashData.targetX, transform.position.y, transform.position.z), m_DashData.t);
                 m_Body.velocity = Vector2.zero;
 
-                if (transform.position.x == m_DashData.targetX || m_LastOtherCollision.collider.IsTouching(m_LastOtherCollision.otherCollider))
+                if (transform.position.x == m_DashData.targetX)
                 {
                     m_DashData.state = DashData.DashState.Cooldown;
                     m_Animator.SetBool("Dashing", false);
@@ -101,28 +111,63 @@ public class Player : Entity
     }
 
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        m_LastOtherCollision = collision;
+        if (m_DashData.state == DashData.DashState.Dashing)
+        {
+            if (collision.contactCount > m_ContactPoints.Length)
+                m_ContactPoints = new ContactPoint2D[(int)Mathf.Pow(2, m_ContactPoints.Length)];
 
-        if (collision.GetContact(0).point.y < collision.otherCollider.bounds.min.y)
-            m_JumpCount = 0;
+            collision.GetContacts(m_ContactPoints);
 
-        else
+            foreach (ContactPoint2D contactPoint in m_ContactPoints)
+                if (contactPoint.point.y >= collision.otherCollider.bounds.min.y)
+                {
+                    m_DashData.state = DashData.DashState.Cooldown;
+                    m_Animator.SetBool("Dashing", false);
+                    break;
+                }
+
+        }
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (m_JumpCount > 0)
+        {
+            if (collision.contactCount > m_ContactPoints.Length)
+                m_ContactPoints = new ContactPoint2D[(int)Mathf.Pow(2, m_ContactPoints.Length)];
+
+            collision.GetContacts(m_ContactPoints);
+
+            foreach (ContactPoint2D contactPoint in m_ContactPoints)
+                if (contactPoint.point.y < collision.otherCollider.bounds.min.y)
+                {
+                    m_JumpCount = 0;
+                    break;
+                }
+        }
+
+
+        //if (collision.GetContact(0).point.y < collision.otherCollider.bounds.min.y)
+            //m_JumpCount = 0;
+
+        /*else
 
         if (m_DashData.state == DashData.DashState.Dashing)
         {
             m_DashData.state = DashData.DashState.Cooldown;
             m_Animator.SetBool("Dashing", false);
-        }
+        }*/
     }
     
 
-     private void move()
+     /*private void move()
     {
         m_Body.velocity = new Vector2(Input.GetAxis("Horizontal") * m_Speed, m_Body.velocity.y);
         m_Animator.SetFloat("Velocity[x]", Mathf.Abs(m_Body.velocity.x));
-    }
+    }*/
 
 
     private void jump()
