@@ -11,6 +11,8 @@ public class Player : Entity
     private byte m_JumpCount = 0;
     private DashData m_DashData = new DashData();
 
+    private Collision2D m_LastOtherCollision;
+
     public float m_Speed = 1.0f;
     public float m_JumpForce = 1.0f;
 
@@ -86,7 +88,7 @@ public class Player : Entity
                 transform.position = Vector3.Lerp(new Vector3(m_DashData.originX, transform.position.y, transform.position.z), new Vector3(m_DashData.targetX, transform.position.y, transform.position.z), m_DashData.t);
                 m_Body.velocity = Vector2.zero;
 
-                if (transform.position.x == m_DashData.targetX)
+                if (transform.position.x == m_DashData.targetX || m_LastOtherCollision.collider.IsTouching(m_LastOtherCollision.otherCollider))
                 {
                     m_DashData.state = DashData.DashState.Cooldown;
                     m_Animator.SetBool("Dashing", false);
@@ -101,8 +103,12 @@ public class Player : Entity
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        m_LastOtherCollision = collision;
+
         if (collision.GetContact(0).point.y < collision.otherCollider.bounds.min.y)
             m_JumpCount = 0;
+
+        else
 
         if (m_DashData.state == DashData.DashState.Dashing)
         {
@@ -138,6 +144,7 @@ public class Player : Entity
             transform.localScale = Vector3.Reflect(transform.localScale, Vector3.left);
         }
     }
+
 
     struct DashData
     {
