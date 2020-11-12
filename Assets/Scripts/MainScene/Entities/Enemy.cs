@@ -28,6 +28,12 @@ public class Enemy : Entity
 
     private void Update()
     {
+        if (m_Health == 0f)
+        {
+            Die();
+            return;
+        }
+
         if ((transform.position.x > m_Player.transform.position.x && m_IsFacingRight) || (transform.position.x < m_Player.transform.position.x && !m_IsFacingRight))
         {
             m_IsFacingRight = !m_IsFacingRight;
@@ -44,7 +50,7 @@ public class Enemy : Entity
             float dmg = collision.gameObject.GetComponent<Projectile>().Damage();
 
             if (m_Health - dmg < 0f)
-                Die();
+                m_Health = 0f;
             else
             {
                 m_Health -= dmg;
@@ -60,8 +66,6 @@ public class Enemy : Entity
 
     public override void Die()
     {
-        m_Health = 0f;
-
         foreach (Projectile projectile in GetComponentsInChildren<Projectile>())
                 projectile.Refresh();
 
