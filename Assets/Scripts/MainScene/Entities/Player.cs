@@ -49,7 +49,6 @@ public class Player : Entity
 
         m_Body = GetComponent<Rigidbody2D>();
         m_Collider = GetComponent<BoxCollider2D>();
-        m_Animator = GetComponentInChildren<Animator>();
     }
 
 
@@ -63,16 +62,19 @@ public class Player : Entity
 
     private void FixedUpdate()
     {
-        m_Body.velocity = new Vector2(m_Move * m_MoveSpeed, m_Body.velocity.y);
-
-        if (m_Jumping)
+        if (m_DashData.state != DashData.DashState.Dashing)
         {
-            Jump();
-            m_Jumping = false;
-        }
+            m_Body.velocity = new Vector2(m_Move * m_MoveSpeed, m_Body.velocity.y);
 
-        if ((Camera.main.WorldToScreenPoint(transform.position).x < Input.mousePosition.x && !m_IsFacingRight) || (Camera.main.WorldToScreenPoint(transform.position).x > Input.mousePosition.x && m_IsFacingRight))
-            Flip();
+            if (m_Jumping)
+            {
+                Jump();
+                m_Jumping = false;
+            }
+
+            if ((Camera.main.WorldToScreenPoint(transform.position).x < Input.mousePosition.x && !m_IsFacingRight) || (Camera.main.WorldToScreenPoint(transform.position).x > Input.mousePosition.x && m_IsFacingRight))
+                Flip();
+        }
 
         if (m_DashData.state == DashData.DashState.Cooldown)
             if (m_DashData.cooldown > 0f)
