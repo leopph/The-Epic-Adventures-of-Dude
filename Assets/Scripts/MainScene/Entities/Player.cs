@@ -75,26 +75,6 @@ public class Player : Entity
             if ((Camera.main.WorldToScreenPoint(transform.position).x < Input.mousePosition.x && !m_IsFacingRight) || (Camera.main.WorldToScreenPoint(transform.position).x > Input.mousePosition.x && m_IsFacingRight))
                 Flip();
         }
-
-        if (m_DashData.state == DashData.DashState.Cooldown)
-            if (m_DashData.cooldown > 0f)
-                m_DashData.cooldown -= Time.fixedDeltaTime;
-
-            else
-                m_DashData.state = DashData.DashState.Ready;
-        else if (m_DashData.state == DashData.DashState.Dashing)
-        {
-            m_DashData.t += Time.fixedDeltaTime / 0.2f;
-
-            transform.position = Vector3.Lerp(new Vector3(m_DashData.originX, transform.position.y, transform.position.z), new Vector3(m_DashData.targetX, transform.position.y, transform.position.z), m_DashData.t);
-            m_Body.velocity = Vector2.zero;
-
-            if (transform.position.x == m_DashData.targetX)
-            {
-                m_DashData.state = DashData.DashState.Cooldown;
-                m_Animator.SetBool("Dashing", false);
-            }
-        }
     }
 
 
@@ -112,9 +92,11 @@ public class Player : Entity
 
         if (Input.GetButtonDown("Jump") && m_JumpCount < 2)
             m_Jumping = true;
+
         m_Animator.SetBool("Jumping", m_JumpCount > 0);
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
             if (m_DashData.state == DashData.DashState.Ready)
             {
                 m_DashData.state = DashData.DashState.Dashing;
@@ -125,14 +107,41 @@ public class Player : Entity
 
                 m_Animator.SetBool("Dashing", true);
             }
+
             else if (m_DashData.state == DashData.DashState.Cooldown)
                 Debug.Log("Cooldown: " + Mathf.RoundToInt(m_DashData.cooldown));
+        }
+            
+        if (m_DashData.state == DashData.DashState.Cooldown)
+        {
+            if (m_DashData.cooldown > 0f)
+                m_DashData.cooldown -= Time.deltaTime;
+
+            else
+                m_DashData.state = DashData.DashState.Ready;
+        }
+            
+        else if (m_DashData.state == DashData.DashState.Dashing)
+        {
+            m_DashData.t += Time.deltaTime / 0.2f;
+
+            transform.position = Vector3.Lerp(new Vector3(m_DashData.originX, transform.position.y, transform.position.z), new Vector3(m_DashData.targetX, transform.position.y, transform.position.z), m_DashData.t);
+            m_Body.velocity = Vector2.zero;
+
+            if (transform.position.x == m_DashData.targetX)
+            {
+                m_DashData.state = DashData.DashState.Cooldown;
+                m_Animator.SetBool("Dashing", false);
+            }
+        }
     }
 
 
 
-    private void OnCollisionEnter2D()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        DashCollisionTest(collision);
+
         if (m_JumpCount > 0)
         {
             float extraHeightTest = 0.05f;
@@ -148,21 +157,7 @@ public class Player : Entity
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (m_DashData.state == DashData.DashState.Dashing)
-        {
-            if (collision.contactCount > m_ContactPoints.Length)
-                m_ContactPoints = new ContactPoint2D[(int)Mathf.Pow(2, m_ContactPoints.Length)];
-
-            collision.GetContacts(m_ContactPoints);
-
-            foreach (ContactPoint2D contactPoint in m_ContactPoints)
-                if (contactPoint.point.y >= collision.otherCollider.bounds.min.y)
-                {
-                    m_DashData.state = DashData.DashState.Cooldown;
-                    m_Animator.SetBool("Dashing", false);
-                    break;
-                }
-        }
+        DashCollisionTest(collision);
     }
 
 
@@ -205,5 +200,26 @@ public class Player : Entity
     {
         m_IsFacingRight = !m_IsFacingRight;
         transform.localScale = Vector3.Reflect(transform.localScale, Vector3.left);
+    }
+
+
+
+    private void DashCollisionTest(Collision2D collision)
+    {
+        if (m_DashData.state == DashData.DashState.Dashing)
+        {
+            if (collision.contactCount > m_ContactPoints.Length)
+                m_ContactPoints = new ContactPoint2D[(int)Mathf.Pow(2, m_ContactPoints.Length)];
+
+            collision.GetContacts(m_ContactPoints);
+
+            foreach (ContactPoint2D contactPoint in m_ContactPoints)
+                if (contactPoint.point.y >= collision.otherCollider.bounds.min.y)
+                {
+                    m_DashData.state = DashData.DashState.Cooldown;
+                    m_Animator.SetBool("Dashing", false);
+                    break;
+                }
+        }
     }
 }

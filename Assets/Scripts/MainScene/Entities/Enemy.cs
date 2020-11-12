@@ -62,10 +62,8 @@ public class Enemy : Entity
     {
         m_Health = 0f;
 
-        Transform[] children = GetComponentsInChildren<Transform>();
-        foreach (Transform child in children)
-            if (child.tag == "PlayerProjectile")
-                child.GetComponent<Projectile>().Refresh();
+        foreach (Projectile projectile in GetComponentsInChildren<Projectile>())
+                projectile.Refresh();
 
         m_CheckpointManager.QueueForRemoval(this);
         gameObject.SetActive(false);
