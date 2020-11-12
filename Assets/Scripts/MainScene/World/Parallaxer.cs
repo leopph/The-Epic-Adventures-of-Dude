@@ -26,7 +26,7 @@ public class Parallaxer : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         for (int i = 0; i < m_Layers.Length; i++)
             m_Layers[i].Layer.position += new Vector3((Camera.main.transform.position.x - m_PrevCamPos) * -1 * m_Layers[i].DepthLevel, 0, 0);

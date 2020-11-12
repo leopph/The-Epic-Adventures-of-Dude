@@ -11,7 +11,7 @@ public abstract class Entity : MonoBehaviour
     protected static CheckpointManager m_CheckpointManager;
 
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         m_CheckpointManager = GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>();
     }
