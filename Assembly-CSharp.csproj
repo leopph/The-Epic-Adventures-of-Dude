@@ -83,7 +83,6 @@
     <Compile Include="Assets\Scripts\MainScene\Managers\TriggerZone.cs" />
     <Compile Include="Assets\Scripts\MainScene\RoomCamera.cs" />
     <Compile Include="Assets\Scripts\MainScene\TreeMan.cs" />
-    <Compile Include="Assets\Scripts\MainScene\Utility\PhysicsManager.cs" />
     <Compile Include="Assets\Scripts\MainScene\WeaponSystem\Arrow.cs" />
     <Compile Include="Assets\Scripts\MainScene\WeaponSystem\Bow.cs" />
     <Compile Include="Assets\Scripts\MainScene\WeaponSystem\Projectile.cs" />
