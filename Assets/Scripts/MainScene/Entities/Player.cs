@@ -87,7 +87,7 @@ public class Player : Entity
             return;
         }
 
-        m_Move = Input.GetAxis("Horizontal");
+        m_Move = Input.GetAxisRaw("Horizontal");
         m_Animator.SetFloat("Velocity[x]", Mathf.Abs(m_Body.velocity.x));
 
         if (Input.GetButtonDown("Jump") && m_JumpCount < 2)
