@@ -39,4 +39,12 @@ public abstract class Projectile : MonoBehaviour
         transform.DetachChildren();
         gameObject.SetActive(false);
     }
+
+
+
+    public static void RefreshAll()
+    {
+        foreach (Projectile projectile in FindObjectsOfType<Projectile>())
+            projectile.Refresh();
+    }
 }

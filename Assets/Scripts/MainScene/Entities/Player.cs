@@ -179,6 +179,7 @@ public class Player : Entity
 
     public override void Die()
     {
+        Projectile.RefreshAll();
         m_CheckpointManager.ReloadCheckPoint();
     }
 
