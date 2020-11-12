@@ -78,13 +78,13 @@ public class Player : Entity
 
         if (m_DashData.state == DashData.DashState.Cooldown)
             if (m_DashData.cooldown > 0f)
-                m_DashData.cooldown -= Time.deltaTime;
+                m_DashData.cooldown -= Time.fixedDeltaTime;
 
             else
                 m_DashData.state = DashData.DashState.Ready;
         else if (m_DashData.state == DashData.DashState.Dashing)
         {
-            m_DashData.t += Time.deltaTime / 0.2f;
+            m_DashData.t += Time.fixedDeltaTime / 0.2f;
 
             transform.position = Vector3.Lerp(new Vector3(m_DashData.originX, transform.position.y, transform.position.z), new Vector3(m_DashData.targetX, transform.position.y, transform.position.z), m_DashData.t);
             m_Body.velocity = Vector2.zero;
