@@ -39,10 +39,8 @@ public class Bow : MonoBehaviour
 
         Vector2 direction = Quaternion.AngleAxis(transform.parent.parent.rotation.eulerAngles.z, Vector3.forward) * Vector2.down;
 
+        ammo.gameObject.GetComponent<Projectile>().Refresh();
         ammo.gameObject.SetActive(true);
-        ammo.GetComponent<Rigidbody2D>().simulated = true;
-        ammo.transform.parent = null;
-        ammo.transform.DetachChildren();
         ammo.transform.position = transform.position;
         ammo.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, direction));
         ammo.velocity = m_ProjectileSpeed * direction;

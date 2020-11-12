@@ -4,12 +4,13 @@
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider))]
-//[RequireComponent(typeof(SpriteRenderer))]
 
 
 public class Enemy : Entity
 {
     private GameObject m_Player;
+
+
 
 
     void Start()
@@ -24,30 +25,6 @@ public class Enemy : Entity
     }
 
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "PlayerProjectile")
-        {
-            float dmg = collision.gameObject.GetComponent<Projectile>().Damage();
-
-            if (m_Health - dmg < 0f)
-            {
-                m_Health = 0;
-                m_CheckpointManager.QueueForRemoval(this);
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                m_Health -= dmg;
-                m_Animator.SetTrigger("Hurt");
-            }
-
-        }
-
-        if (collision.gameObject.tag == "Player")
-            collision.gameObject.GetComponent<Player>().Die();
-    }
-
 
     private void Update()
     {
@@ -56,5 +33,41 @@ public class Enemy : Entity
             m_IsFacingRight = !m_IsFacingRight;
             transform.localScale = Vector3.Reflect(transform.localScale, Vector3.left);
         }
+    }
+
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "PlayerProjectile")
+        {
+            float dmg = collision.gameObject.GetComponent<Projectile>().Damage();
+
+            if (m_Health - dmg < 0f)
+                Die();
+            else
+            {
+                m_Health -= dmg;
+                m_Animator.SetTrigger("Hurt");
+            }
+        }
+
+        else if (collision.gameObject.tag == "Player")
+            collision.gameObject.GetComponent<Player>().Die();
+    }
+
+
+
+    public override void Die()
+    {
+        m_Health = 0f;
+
+        Transform[] children = GetComponentsInChildren<Transform>();
+        foreach (Transform child in children)
+            if (child.tag == "PlayerProjectile")
+                child.GetComponent<Projectile>().Refresh();
+
+        m_CheckpointManager.QueueForRemoval(this);
+        gameObject.SetActive(false);
     }
 }

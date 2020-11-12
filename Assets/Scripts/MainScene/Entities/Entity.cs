@@ -11,10 +11,12 @@ public abstract class Entity : MonoBehaviour
     protected static CheckpointManager m_CheckpointManager;
 
 
+
     protected virtual void Awake()
     {
         m_CheckpointManager = GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>();
     }
+
 
 
     public void ResetHealth()
@@ -23,12 +25,13 @@ public abstract class Entity : MonoBehaviour
     }
 
 
+
     public bool FacingRight()
     {
         return m_IsFacingRight;
     }
 
 
-    //public float GetHealth() { return m_Health; }
-    //public float GetMaxHealth() { return m_MaxHealth; }
+
+    public abstract void Die();
 }

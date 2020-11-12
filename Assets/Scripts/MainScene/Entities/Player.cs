@@ -7,7 +7,7 @@
 
 public class Player : Entity
 {
-    struct DashData
+    private struct DashData
     {
         public enum DashState
         {
@@ -99,7 +99,7 @@ public class Player : Entity
 
 
 
-    void Update()
+    private void Update()
     {
         if (m_Health < 0f)
         {
@@ -162,7 +162,6 @@ public class Player : Entity
                     m_Animator.SetBool("Dashing", false);
                     break;
                 }
-
         }
     }
 
@@ -183,7 +182,7 @@ public class Player : Entity
 
 
 
-    public void Die()
+    public override void Die()
     {
         m_CheckpointManager.ReloadCheckPoint();
     }
