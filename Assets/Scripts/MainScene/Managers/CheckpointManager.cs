@@ -72,6 +72,8 @@ public class CheckpointManager : MonoBehaviour
     {
         m_Player.entity.transform.position = m_Player.position;
 
+        Projectile.RefreshAll();
+
         foreach (RespawnEntry entry in m_Enemies)
         {
             entry.entity.transform.position = entry.position;
@@ -80,12 +82,6 @@ public class CheckpointManager : MonoBehaviour
 
         foreach (GameManager manager in m_Managers)
             manager.Restart();
-
-        foreach (GameObject projectile in GameObject.FindGameObjectsWithTag("PlayerProjectile"))
-        {
-            projectile.transform.parent = null;
-            projectile.SetActive(false);
-        }
     }
 
 
