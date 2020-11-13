@@ -7,27 +7,23 @@
 
 public class Player : Entity
 {
-    private struct DashData
+    private enum DashState
     {
-        public enum DashState
-        {
-            Dashing, Ready, Cooldown
-        }
-
-        public DashState state;
-        public float originX;
-        public float targetX;
-        public float t;
-        public float cooldown;
+        Ready, Dashing, Cooldown
     }
 
+    private DashState m_DashState;
+    private Vector3 m_DashOrigin;
+    private Vector3 m_DashTarget;
+    private float m_DashInterpolationPoint;
+    private float m_DashCooldown;
+    private const float m_DashTime = 0.1f;
+    private readonly Vector3 m_DashDeltaPosition = new Vector3(5f, 0, 0);
 
     private Rigidbody2D m_Body;
     private BoxCollider2D m_Collider;
 
     private ContactPoint2D[] m_ContactPoints = new ContactPoint2D[2];
-
-    private DashData m_DashData = new DashData();
 
     public float m_JumpForce = 1.0f;
     private byte m_JumpCount = 0;
@@ -62,7 +58,7 @@ public class Player : Entity
 
     private void FixedUpdate()
     {
-        if (m_DashData.state != DashData.DashState.Dashing)
+        if (m_DashState != DashState.Dashing)
         {
             m_Body.velocity = new Vector2(m_Move * m_MoveSpeed, m_Body.velocity.y);
 
@@ -92,45 +88,42 @@ public class Player : Entity
 
         if (Input.GetButtonDown("Jump") && m_JumpCount < 2)
             m_Jumping = true;
-
         m_Animator.SetBool("Jumping", m_JumpCount > 0);
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (m_DashData.state == DashData.DashState.Ready)
+            if (m_DashState == DashState.Ready)
             {
-                m_DashData.state = DashData.DashState.Dashing;
-                m_DashData.originX = transform.position.x;
-                m_DashData.targetX = transform.position.x + 5f * (m_IsFacingRight ? 1f : -1f);
-                m_DashData.t = 0f;
-                m_DashData.cooldown = 2f;
-
+                m_DashState = DashState.Dashing;
+                m_DashOrigin = transform.position;
+                m_DashTarget = transform.position + (m_IsFacingRight ? m_DashDeltaPosition : Vector3.Reflect(m_DashDeltaPosition, Vector3.right));
+                m_DashInterpolationPoint = 0f;
+                m_DashCooldown = 2f;
+                m_Body.velocity = Vector2.zero;
                 m_Animator.SetBool("Dashing", true);
             }
 
-            else if (m_DashData.state == DashData.DashState.Cooldown)
-                Debug.Log("Cooldown: " + Mathf.RoundToInt(m_DashData.cooldown));
+            else if (m_DashState == DashState.Cooldown)
+                Debug.Log("Cooldown: " + Mathf.RoundToInt(m_DashCooldown));
         }
-            
-        if (m_DashData.state == DashData.DashState.Cooldown)
+
+        if (m_DashState == DashState.Cooldown)
         {
-            if (m_DashData.cooldown > 0f)
-                m_DashData.cooldown -= Time.deltaTime;
+            if (m_DashCooldown > 0f)
+                m_DashCooldown -= Time.deltaTime;
 
             else
-                m_DashData.state = DashData.DashState.Ready;
+                m_DashState = DashState.Ready;
         }
-            
-        else if (m_DashData.state == DashData.DashState.Dashing)
+
+        else if (m_DashState == DashState.Dashing)
         {
-            m_DashData.t += Time.deltaTime / 0.2f;
+            m_DashInterpolationPoint += Time.deltaTime / m_DashTime;
+            transform.position = Vector3.Lerp(m_DashOrigin, m_DashTarget, m_DashInterpolationPoint);
 
-            transform.position = Vector3.Lerp(new Vector3(m_DashData.originX, transform.position.y, transform.position.z), new Vector3(m_DashData.targetX, transform.position.y, transform.position.z), m_DashData.t);
-            m_Body.velocity = Vector2.zero;
-
-            if (transform.position.x == m_DashData.targetX)
+            if (transform.position == m_DashTarget)
             {
-                m_DashData.state = DashData.DashState.Cooldown;
+                m_DashState = DashState.Cooldown;
                 m_Animator.SetBool("Dashing", false);
             }
         }
@@ -207,7 +200,7 @@ public class Player : Entity
 
     private void DashCollisionTest(Collision2D collision)
     {
-        if (m_DashData.state == DashData.DashState.Dashing)
+        if (m_DashState == DashState.Dashing)
         {
             if (collision.contactCount > m_ContactPoints.Length)
                 m_ContactPoints = new ContactPoint2D[(int)Mathf.Pow(2, m_ContactPoints.Length)];
@@ -217,7 +210,7 @@ public class Player : Entity
             foreach (ContactPoint2D contactPoint in m_ContactPoints)
                 if (contactPoint.point.y >= collision.otherCollider.bounds.min.y)
                 {
-                    m_DashData.state = DashData.DashState.Cooldown;
+                    m_DashState = DashState.Cooldown;
                     m_Animator.SetBool("Dashing", false);
                     break;
                 }
