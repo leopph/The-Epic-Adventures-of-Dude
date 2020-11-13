@@ -27,7 +27,7 @@ public class Player : Entity
 
     public float m_JumpForce = 1.0f;
     private byte m_JumpCount = 0;
-    private bool m_Jumping = false;
+    private bool m_Jump = false;
 
     private float m_Move = 0f;
     public float m_MoveSpeed = 1.0f;
@@ -62,10 +62,10 @@ public class Player : Entity
         {
             m_Body.velocity = new Vector2(m_Move * m_MoveSpeed, m_Body.velocity.y);
 
-            if (m_Jumping)
+            if (m_Jump)
             {
                 Jump();
-                m_Jumping = false;
+                m_Jump = false;
             }
 
             if ((Camera.main.WorldToScreenPoint(transform.position).x < Input.mousePosition.x && !m_IsFacingRight) || (Camera.main.WorldToScreenPoint(transform.position).x > Input.mousePosition.x && m_IsFacingRight))
@@ -87,7 +87,7 @@ public class Player : Entity
         m_Animator.SetFloat("Velocity[x]", Mathf.Abs(m_Body.velocity.x));
 
         if (Input.GetButtonDown("Jump") && m_JumpCount < 2)
-            m_Jumping = true;
+            m_Jump = true;
         m_Animator.SetBool("Jumping", m_JumpCount > 0);
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
@@ -172,6 +172,9 @@ public class Player : Entity
 
     public override void Die()
     {
+        m_Animator.SetBool("Dashing", false);
+        m_DashState = DashState.Ready;
+
         m_CheckpointManager.ReloadCheckPoint();
     }
 
