@@ -40,6 +40,7 @@ public class CombatArea : TriggerZone
                             gameObject.SetActive(false);
 
                         m_State = CombatState.Finished;
+                        m_CheckpointManager.QueueForRemoval(this);
                     }
                     break;
             }

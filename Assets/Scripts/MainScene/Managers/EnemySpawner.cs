@@ -10,7 +10,7 @@ public class EnemySpawner : GameManager
 {
     public GameObject m_EnemyType;
     public int[] m_WaveAmounts;
-    public float m_Range;
+    public float m_ActivationRange;
 
     private List<Entity> m_Enemies = new List<Entity>();
     private Transform m_Player;
@@ -45,12 +45,15 @@ public class EnemySpawner : GameManager
     // Update is called once per frame
     void Update()
     {
-        if (m_State != SpawnerState.Inactive && Vector3.Distance(m_Player.position, transform.position) < m_Range)
+        if (m_State != SpawnerState.Inactive)
             switch (m_State)
             {
                 case SpawnerState.Sleeping:
-                    m_CurrentWave = 0;
-                    m_State = SpawnerState.Spawning;
+                    if (Vector3.Distance(m_Player.position, transform.position) < m_ActivationRange)
+                    {
+                        m_CurrentWave = 0;
+                        m_State = SpawnerState.Spawning;
+                    }
                     break;
 
                 case SpawnerState.Spawning:

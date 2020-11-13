@@ -392,7 +392,7 @@ ScriptsOnlyBuild:
     className: SpriteShapeController
   - hash:
       serializedVersion: 2
-      Hash: b215c099bdf883e899f298a32bc5cfec
+      Hash: 198422cf189418280c2d0d20265ca058
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemySpawner
