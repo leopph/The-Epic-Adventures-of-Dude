@@ -13,8 +13,9 @@ public class Enemy : Entity
 
 
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         m_MaxHealth = 100f;
         m_Health = m_MaxHealth;
         m_IsFacingRight = true;

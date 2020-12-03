@@ -9,10 +9,12 @@ public class Bow : MonoBehaviour
     public int m_AmmoPoolSize = 420;
 
     private List<Rigidbody2D> m_AmmoPool;
+    private AudioManager m_AudioManager;
 
 
     void Start()
     {
+        m_AudioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         transform.rotation = Quaternion.Euler(0, 0, -90);
         transform.position = transform.parent.position;
 
@@ -44,6 +46,8 @@ public class Bow : MonoBehaviour
         ammo.transform.position = transform.position;
         ammo.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, direction));
         ammo.velocity = m_ProjectileSpeed * direction;
+
+        m_AudioManager.Play("Arrow");
     }
 
     private Rigidbody2D GetAmmoFromPool()

@@ -35,10 +35,8 @@ public class Player : Entity
 
 
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
-
         m_MaxHealth = 100f;
         m_Health = m_MaxHealth;
         m_IsFacingRight = false;
@@ -49,9 +47,11 @@ public class Player : Entity
 
 
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         m_Animator = GetComponentInChildren<Animator>();
+        m_AudioManager.Play("Ambient");
     }
 
 
@@ -101,6 +101,7 @@ public class Player : Entity
                 m_DashCooldown = 2f;
                 m_Body.velocity = Vector2.zero;
                 m_Animator.SetBool("Dashing", true);
+                m_AudioManager.Play("Dash");
             }
 
             else if (m_DashState == DashState.Cooldown)

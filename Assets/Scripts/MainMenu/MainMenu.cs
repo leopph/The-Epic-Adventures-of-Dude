@@ -3,9 +3,29 @@
 
 public class MainMenu : MonoBehaviour
 {
+    private AudioManager m_AudioManager;
+
+
+
+
     private void Awake()
     {
         GameObject.Find("VersionNumber").GetComponent<UnityEngine.UI.Text>().text = Application.version;
+        m_AudioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+    }
+
+
+
+    private void Start()
+    {
+        m_AudioManager.Play("MainMenuTheme");
+    }
+
+
+
+    public void OnClick()
+    {
+        m_AudioManager.Play("MainMenuButton");
     }
 
 

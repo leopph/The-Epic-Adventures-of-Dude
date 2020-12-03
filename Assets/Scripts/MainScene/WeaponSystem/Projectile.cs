@@ -13,6 +13,7 @@ public abstract class Projectile : MonoBehaviour
     protected float m_MaxDMG;
 
     protected Rigidbody2D m_Rigidbody;
+    protected AudioManager m_AudioManager;
 
 
 
@@ -20,6 +21,13 @@ public abstract class Projectile : MonoBehaviour
     protected virtual void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+
+
+    protected void Start()
+    {
+        m_AudioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
 
