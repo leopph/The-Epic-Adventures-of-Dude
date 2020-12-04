@@ -31,6 +31,7 @@ public class Player : Entity
     public float m_MoveSpeed = 1.0f;
 
     private Transform m_BodyObject;
+    private DashCooldownText m_DashCooldownText;
 
 
 
@@ -57,6 +58,9 @@ public class Player : Entity
 
         m_HealthBar = GetComponentInChildren<HealthBar>();
         m_HealthBar.Init(100);
+
+        m_DashCooldownText = GetComponentInChildren<DashCooldownText>();
+        m_DashCooldownText.gameObject.SetActive(false);
     }
 
 
@@ -80,8 +84,10 @@ public class Player : Entity
 
 
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         m_Move = Input.GetAxisRaw("Horizontal");
         m_Animator.SetFloat("Velocity[x]", Mathf.Abs(m_Body.velocity.x));
 
@@ -104,7 +110,7 @@ public class Player : Entity
             }
 
             else if (m_DashState == DashState.Cooldown)
-                Debug.Log("Cooldown: " + Mathf.RoundToInt(m_DashCooldown));
+                m_DashCooldownText.Set(Mathf.RoundToInt(m_DashCooldown));
         }
 
         if (m_DashState == DashState.Cooldown)

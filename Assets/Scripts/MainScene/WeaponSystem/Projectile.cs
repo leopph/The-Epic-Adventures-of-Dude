@@ -2,6 +2,7 @@
 
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(ParticleSystem))]
 
 
 public abstract class Projectile : MonoBehaviour
@@ -14,6 +15,7 @@ public abstract class Projectile : MonoBehaviour
 
     protected Rigidbody2D m_Rigidbody;
     protected AudioManager m_AudioManager;
+    protected ParticleSystem m_ParticleSystem;
 
 
 
@@ -21,6 +23,8 @@ public abstract class Projectile : MonoBehaviour
     protected virtual void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
+        m_ParticleSystem = GetComponent<ParticleSystem>();
+        m_ParticleSystem.Play();
     }
 
 
@@ -41,11 +45,19 @@ public abstract class Projectile : MonoBehaviour
 
     public void Refresh()
     {
+        m_ParticleSystem.Play();
         m_TimeLeft = m_LifeTime;
         m_Rigidbody.simulated = true;
         transform.parent = null;
         transform.DetachChildren();
         gameObject.SetActive(false);
+    }
+
+
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        m_ParticleSystem.Stop();
     }
 
 

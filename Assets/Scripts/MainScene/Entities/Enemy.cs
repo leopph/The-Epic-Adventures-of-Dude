@@ -35,8 +35,10 @@ public class Enemy : Entity
 
 
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if ((transform.position.x > m_Player.transform.position.x && m_IsFacingRight) || (transform.position.x < m_Player.transform.position.x && !m_IsFacingRight))
         {
             m_IsFacingRight = !m_IsFacingRight;

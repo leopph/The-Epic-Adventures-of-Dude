@@ -29,8 +29,10 @@ public class Arrow : Projectile
 
 
 
-    void OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
+        base.OnCollisionEnter2D(collision);
+
         m_Rigidbody.simulated = false;
         transform.parent = collision.transform;
 

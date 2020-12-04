@@ -25,6 +25,14 @@ public abstract class Entity : MonoBehaviour
 
 
 
+    protected virtual void Update()
+    {
+        if (m_Health <= 0f)
+            Die();
+    }
+
+
+
     public void ResetHealth()
     {
         m_Health = m_MaxHealth;
@@ -47,8 +55,5 @@ public abstract class Entity : MonoBehaviour
         m_Health -= damage;
         m_Animator.SetTrigger("Hurt");
         m_HealthBar.Set(m_Health);
-
-        if (m_Health <= 0f)
-            Die();
     }
 }
