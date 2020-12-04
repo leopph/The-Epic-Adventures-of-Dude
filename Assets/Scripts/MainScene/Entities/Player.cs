@@ -31,7 +31,10 @@ public class Player : Entity
     public float m_MoveSpeed = 1.0f;
 
     private Transform m_BodyObject;
+
     private DashCooldownText m_DashCooldownText;
+    
+    private ParticleSystem m_ParticleSystem;
 
 
 
@@ -40,6 +43,8 @@ public class Player : Entity
         m_MaxHealth = 100f;
         m_Health = m_MaxHealth;
         m_IsFacingRight = false;
+
+        m_ParticleSystem = GetComponent<ParticleSystem>();
     }
 
 
@@ -189,7 +194,10 @@ public class Player : Entity
     private void Jump()
     {
         if (m_JumpCount != 0)
+        {
             m_Body.velocity = new Vector2(m_Body.velocity.x, 0);
+            m_ParticleSystem.Play();
+        }
 
         m_Body.AddForce(new Vector2(0, m_JumpForce), ForceMode2D.Impulse);
 
