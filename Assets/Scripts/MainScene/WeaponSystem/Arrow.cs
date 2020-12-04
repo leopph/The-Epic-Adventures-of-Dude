@@ -13,8 +13,16 @@ public class Arrow : Projectile
         m_MinDMG = 30f;
         m_MaxDMG = 50f;
 
-        m_Rigidbody.centerOfMass = new Vector2(1f, 0f);
+        m_Rigidbody.centerOfMass = new Vector2(0.15f, 0f);
         m_Rigidbody.simulated = false;
+    }
+
+
+
+    private void FixedUpdate()
+    {
+        if (m_Rigidbody.simulated)
+            transform.rotation = Quaternion.Euler(0, 0, -Vector2.SignedAngle(m_Rigidbody.velocity, Vector2.right));
     }
 
 
