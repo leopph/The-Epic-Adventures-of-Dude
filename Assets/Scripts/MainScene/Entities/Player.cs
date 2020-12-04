@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Animator))]
 
 
 public class Player : Entity
@@ -32,6 +30,7 @@ public class Player : Entity
     private float m_Move = 0f;
     public float m_MoveSpeed = 1.0f;
 
+    private Transform m_BodyObject;
 
 
 
@@ -40,9 +39,6 @@ public class Player : Entity
         m_MaxHealth = 100f;
         m_Health = m_MaxHealth;
         m_IsFacingRight = false;
-
-        m_Body = GetComponent<Rigidbody2D>();
-        m_Collider = GetComponent<BoxCollider2D>();
     }
 
 
@@ -50,8 +46,17 @@ public class Player : Entity
     protected override void Start()
     {
         base.Start();
+
+        m_Body = GetComponentInChildren<Rigidbody2D>();
+        m_Collider = GetComponentInChildren<BoxCollider2D>();
+
+        m_BodyObject = transform.GetChild(1);
+
         m_Animator = GetComponentInChildren<Animator>();
         m_AudioManager.Play("Ambient");
+
+        m_HealthBar = GetComponentInChildren<HealthBar>();
+        m_HealthBar.Init(100);
     }
 
 
@@ -77,12 +82,6 @@ public class Player : Entity
 
     private void Update()
     {
-        if (m_Health < 0f)
-        {
-            Die();
-            return;
-        }
-
         m_Move = Input.GetAxisRaw("Horizontal");
         m_Animator.SetFloat("Velocity[x]", Mathf.Abs(m_Body.velocity.x));
 
@@ -196,7 +195,8 @@ public class Player : Entity
     private void Flip()
     {
         m_IsFacingRight = !m_IsFacingRight;
-        transform.localScale = Vector3.Reflect(transform.localScale, Vector3.left);
+        //transform.localScale = Vector3.Reflect(transform.localScale, Vector3.left);
+        m_BodyObject.localScale = Vector3.Reflect(m_BodyObject.localScale, Vector3.left);
     }
 
 

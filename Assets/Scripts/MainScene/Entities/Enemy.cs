@@ -9,36 +9,38 @@
 public class Enemy : Entity
 {
     private GameObject m_Player;
+    private Transform m_BodyTransform;
 
+
+
+
+    protected void Awake()
+    {
+        m_MaxHealth = 100f;
+        m_Health = m_MaxHealth;
+        m_IsFacingRight = true;
+    }
 
 
 
     protected override void Start()
     {
         base.Start();
-        m_MaxHealth = 100f;
-        m_Health = m_MaxHealth;
-        m_IsFacingRight = true;
-
         m_Animator = GetComponent<Animator>();
         m_Player = GameObject.FindWithTag("Player");
         m_CheckpointManager.Register(this, transform.position);
+
+        m_BodyTransform = transform.GetChild(0);
     }
 
 
 
     private void Update()
     {
-        if (m_Health == 0f)
-        {
-            Die();
-            return;
-        }
-
         if ((transform.position.x > m_Player.transform.position.x && m_IsFacingRight) || (transform.position.x < m_Player.transform.position.x && !m_IsFacingRight))
         {
             m_IsFacingRight = !m_IsFacingRight;
-            transform.localScale = Vector3.Reflect(transform.localScale, Vector3.left);
+            m_BodyTransform.localScale = Vector3.Reflect(m_BodyTransform.localScale, Vector3.left);
         }
     }
 
@@ -47,20 +49,10 @@ public class Enemy : Entity
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "PlayerProjectile")
-        {
-            float dmg = collision.gameObject.GetComponent<Projectile>().Damage();
-
-            if (m_Health - dmg < 0f)
-                m_Health = 0f;
-            else
-            {
-                m_Health -= dmg;
-                m_Animator.SetTrigger("Hurt");
-            }
-        }
+            TakeDamage(collision.gameObject.GetComponent<Projectile>().Damage());
 
         else if (collision.gameObject.tag == "Player")
-            collision.gameObject.GetComponent<Player>().Die();
+            collision.gameObject.GetComponent<Player>().TakeDamage(Random.Range(30f, 35f));
     }
 
 

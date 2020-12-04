@@ -71,6 +71,7 @@ public class CheckpointManager : MonoBehaviour
     public void ReloadCheckPoint()
     {
         m_Player.entity.transform.position = m_Player.position;
+        m_Player.entity.ResetHealth();
 
         Projectile.RefreshAll();
 
