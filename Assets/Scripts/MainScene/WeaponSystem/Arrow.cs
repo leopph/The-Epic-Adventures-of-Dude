@@ -39,6 +39,9 @@ public class Arrow : Projectile
 
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == gameObject.tag)
+            return;
+
         base.OnCollisionEnter2D(collision);
 
         m_Rigidbody.simulated = false;
