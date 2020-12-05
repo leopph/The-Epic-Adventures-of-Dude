@@ -1599,13 +1599,18 @@ MonoBehaviour:
     m_Source: {fileID: 0}
     m_Volume: 1
     m_Pitch: 1
+    m_VolumeRandomness: 0
+    m_PitchRandomness: 0
     m_isLooping: 1
   - m_Name: MainMenuButton
-    m_Clip: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
+    m_Clip: {fileID: 8300000, guid: 4cb35ffea3fc1324397906c7968cddf4, type: 3}
     m_Source: {fileID: 0}
     m_Volume: 1
     m_Pitch: 1
+    m_VolumeRandomness: 0
+    m_PitchRandomness: 0
     m_isLooping: 0
+  m_Music: []
 --- !u!4 &832552124
 Transform:
   m_ObjectHideFlags: 0

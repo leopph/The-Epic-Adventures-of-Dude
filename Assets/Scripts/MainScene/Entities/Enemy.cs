@@ -53,7 +53,7 @@ public class Enemy : Entity
         if (collision.gameObject.tag == "PlayerProjectile")
         {
             TakeDamage(collision.gameObject.GetComponent<Projectile>().Damage());
-            m_AudioManager.Play("DemonHurt");
+            m_AudioManager.PlaySound("DemonHurt");
         }    
 
         else if (collision.gameObject.tag == "Player")

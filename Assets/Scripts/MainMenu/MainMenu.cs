@@ -18,14 +18,14 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
-        m_AudioManager.Play("MainMenuTheme");
+        m_AudioManager.PlaySound("MainMenuTheme");
     }
 
 
 
     public void OnClick()
     {
-        m_AudioManager.Play("MainMenuButton");
+        m_AudioManager.PlaySound("MainMenuButton");
     }
 
 

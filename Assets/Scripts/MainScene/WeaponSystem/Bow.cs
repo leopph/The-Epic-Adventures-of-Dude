@@ -30,6 +30,9 @@ public class Bow : MonoBehaviour
 
     void Update()
     {
+        if (PauseMenu.IsPaused)
+            return;
+
         if (Input.GetMouseButtonDown(0))
             Fire();
     }
@@ -47,7 +50,7 @@ public class Bow : MonoBehaviour
         ammo.transform.rotation = Quaternion.Euler(0, 0, Vector2.SignedAngle(Vector2.right, direction));
         ammo.velocity = m_ProjectileSpeed * direction;
 
-        m_AudioManager.Play("Arrow");
+        m_AudioManager.PlaySound("Arrow");
     }
 
     private Rigidbody2D GetAmmoFromPool()

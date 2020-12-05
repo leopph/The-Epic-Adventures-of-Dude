@@ -59,7 +59,7 @@ public class Player : Entity
         m_BodyObject = transform.GetChild(1);
 
         m_Animator = GetComponentInChildren<Animator>();
-        m_AudioManager.Play("Ambient");
+        m_AudioManager.PlayMusic("Ambient");
 
         m_HealthBar = GetComponentInChildren<HealthBar>();
         m_HealthBar.Init(100);
@@ -91,6 +91,9 @@ public class Player : Entity
 
     protected override void Update()
     {
+        if (PauseMenu.IsPaused)
+            return;
+
         base.Update();
 
         m_Move = Input.GetAxisRaw("Horizontal");
@@ -111,13 +114,13 @@ public class Player : Entity
                 m_DashCooldown = 2f;
                 m_Body.velocity = Vector2.zero;
                 m_Animator.SetBool("Dashing", true);
-                m_AudioManager.Play("Dash");
+                m_AudioManager.PlaySound("Dash");
             }
 
             else if (m_DashState == DashState.Cooldown)
             {
                 m_DashCooldownText.Set(Mathf.RoundToInt(m_DashCooldown));
-                m_AudioManager.Play("Cooldown");
+                m_AudioManager.PlaySound("Cooldown");
             }
         }
 
@@ -200,7 +203,7 @@ public class Player : Entity
         {
             m_Body.velocity = new Vector2(m_Body.velocity.x, 0);
             m_ParticleSystem.Play();
-            m_AudioManager.Play("JumpBoost");
+            m_AudioManager.PlaySound("JumpBoost");
         }
 
         m_Body.AddForce(new Vector2(0, m_JumpForce), ForceMode2D.Impulse);

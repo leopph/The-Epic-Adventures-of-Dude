@@ -33,4 +33,9 @@ public struct Sound
         m_Source.pitch = m_Pitch + (Random.Range(-m_PitchRandomness, m_PitchRandomness));
         m_Source.Play();
     }
+
+
+    public void Stop() { m_Source.Stop(); }
+    public void Pause() { m_Source.Pause(); }
+    public void Resume() { m_Source.UnPause(); }
 }

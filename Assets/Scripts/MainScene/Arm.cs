@@ -18,6 +18,9 @@ public class Arm : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PauseMenu.IsPaused)
+            return;
+
         Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - m_ShoulderPoint.position;
 
         if ((direction.x > 0 && !m_Player.FacingRight()) || (direction.x < 0 && m_Player.FacingRight()))

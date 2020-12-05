@@ -44,7 +44,7 @@ public class Arrow : Projectile
         m_Rigidbody.simulated = false;
         transform.parent = collision.transform;
 
-        m_AudioManager.Play("Explody");
+        m_AudioManager.PlaySound("Explody");
     }
 
 
