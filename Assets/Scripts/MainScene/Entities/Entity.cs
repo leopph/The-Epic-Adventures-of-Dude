@@ -50,7 +50,7 @@ public abstract class Entity : MonoBehaviour
 
     public abstract void Die();
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         m_Health -= damage;
         m_Animator.SetTrigger("Hurt");

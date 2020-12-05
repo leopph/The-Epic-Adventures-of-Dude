@@ -187,6 +187,16 @@ public class Player : Entity
 
 
 
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        Camera.main.GetComponent<CameraShake>().Shake();
+    }
+
+
+
+
     public override void Die()
     {
         m_Animator.SetBool("Dashing", false);
