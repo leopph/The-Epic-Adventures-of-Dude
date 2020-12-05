@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
+    private static CheckpointMarker m_CheckpointMarker;
+
     private RespawnEntry m_Player;
     private HashSet<RespawnEntry> m_Enemies;
     private HashSet<GameManager> m_Managers;
@@ -23,6 +25,9 @@ public class CheckpointManager : MonoBehaviour
         GameObject player = GameObject.FindWithTag("Player");
         m_Player = new RespawnEntry(player.GetComponent<Player>(), player.transform.position);
     }
+
+
+    private void Start() { m_CheckpointMarker = GameObject.Find("CheckpointMarker").GetComponent<CheckpointMarker>(); }
 
 
     public void Register(GameManager manager)
@@ -54,7 +59,7 @@ public class CheckpointManager : MonoBehaviour
 
     public void SetCheckpoint(Checkpoint checkpoint)
     {
-        Debug.Log("Checkpoint reached.");
+        m_CheckpointMarker.Display();
 
         m_Player.position = checkpoint.transform.position;
 
