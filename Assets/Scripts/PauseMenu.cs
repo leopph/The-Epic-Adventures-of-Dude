@@ -31,8 +31,8 @@ public class PauseMenu : MonoBehaviour
     {
         m_AudioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         m_CheckPointManager = GameObject.Find("CheckpointManager").GetComponent<CheckpointManager>();
-        m_VSyncButtonText = GameObject.Find("VSyncButton").GetComponentInChildren<Text>();
-        m_FPSCounterButtonText = GameObject.Find("FPSCounterButton").GetComponentInChildren<Text>();
+        m_VSyncButtonText = transform.Find("Options").Find("VSyncButton").GetComponentInChildren<Text>();
+        m_FPSCounterButtonText = transform.Find("Options").Find("FPSCounterButton").GetComponentInChildren<Text>();
 
         m_VSyncButtonText.text = "VSYNC: " + (QualitySettings.vSyncCount == 0 ? "OFF" : QualitySettings.vSyncCount == 1 ? "ON" : "ERROR");
         m_FPSCounterButtonText.text = "FPS COUNTER: " + (PlayerPrefs.GetInt("FPSCounter") == 1 ? "ON" : "OFF");
@@ -58,9 +58,12 @@ public class PauseMenu : MonoBehaviour
 
         m_Paused = true;
         Time.timeScale = 0f;
+
         m_AudioManager.PauseSounds();
         m_AudioManager.PauseMusic("Ambient");
         m_AudioManager.PlayMusic("Pause");
+
+        transform.Find("Main").gameObject.SetActive(true);
         m_Canvas.enabled = true;
     }
 
@@ -73,10 +76,14 @@ public class PauseMenu : MonoBehaviour
 
         m_Paused = false;
         Time.timeScale = 1f;
+
         m_AudioManager.StopMusic("Pause");
         m_AudioManager.ResumeMusic("Ambient");
         m_AudioManager.ResumeSounds();
+
         m_Canvas.enabled = false;
+        for (int i = 1; i < transform.childCount; i++)
+            transform.GetChild(i).gameObject.SetActive(false);
     }
 
 
