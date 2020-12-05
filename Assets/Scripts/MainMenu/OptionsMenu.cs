@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class OptionsMenu : MonoBehaviour
 {
-    Slider m_VolumeSlider;
-    TextMeshProUGUI m_VSyncText;
-    TextMeshProUGUI m_FPSText;
+    private Slider m_VolumeSlider;
+    private TextMeshProUGUI m_VSyncText;
+    private TextMeshProUGUI m_FPSText;
 
 
     private void Start()
@@ -19,7 +19,7 @@ public class OptionsMenu : MonoBehaviour
         m_VSyncText.text = "VSYNC: " + (QualitySettings.vSyncCount == 1 ? "ON" : QualitySettings.vSyncCount == 0 ? "OFF" : "ERROR");
 
         m_FPSText = GameObject.Find("FPSButton").GetComponentInChildren<TextMeshProUGUI>();
-        m_FPSText.text = "FRAMERATE COUNTER: " + (FrameRateCounter.m_IsEnabled ? "ON" : "OFF");
+        m_FPSText.text = "FRAMERATE COUNTER: " + (PlayerPrefs.HasKey("FPSCounter") && PlayerPrefs.GetInt("FPSCounter") == 1 ? "ON" : "OFF");
     }
 
 
@@ -43,8 +43,10 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetFPSCounter()
     {
-        FrameRateCounter.m_IsEnabled = !FrameRateCounter.m_IsEnabled;
+        if (!PlayerPrefs.HasKey("FPSCounter"))
+            PlayerPrefs.SetInt("FPSCounter", 0);
 
-        m_FPSText.text = "FRAMERATE COUNTER: " + (FrameRateCounter.m_IsEnabled ? "ON" : "OFF");
+        PlayerPrefs.SetInt("FPSCounter", 1 - PlayerPrefs.GetInt("FPSCounter"));
+        m_FPSText.text = "FRAMERATE COUNTER: " + (PlayerPrefs.GetInt("FPSCounter") == 1 ? "ON" : "OFF");
     }
 }
