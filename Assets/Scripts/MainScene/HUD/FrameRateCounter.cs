@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class FrameRateCounter : MonoBehaviour
 {
     private float m_TimeSinceUpdate = 0f;
+    private int m_FrameCount = 0;
     private string m_KeyName = "FPSCounter";
     private System.Text.StringBuilder m_StringBuilder = new System.Text.StringBuilder();
     private Text m_Text;
+
 
 
 
@@ -36,15 +38,20 @@ public class FrameRateCounter : MonoBehaviour
         }
 
         m_TimeSinceUpdate += Time.unscaledDeltaTime;
+        m_FrameCount++;
 
         if (m_TimeSinceUpdate > 0.5f)
         {
-            m_TimeSinceUpdate = 0f;
+            //int fps = (int)(1f / Time.unscaledDeltaTime);
+            //double frameTime = System.Math.Round(Time.unscaledDeltaTime * 1000.0, 2);
 
-            int fps = (int)(1f / Time.unscaledDeltaTime);
-            double frameTime = System.Math.Round(Time.unscaledDeltaTime * 1000.0, 2);
+            int fps = Mathf.RoundToInt(m_FrameCount / m_TimeSinceUpdate);
+            double frameTime = System.Math.Round(1000 * m_TimeSinceUpdate / m_FrameCount, 2);
 
             m_Text.text = m_StringBuilder.Clear().Append("FPS: ").AppendLine(fps.ToString()).Append("Frametime: ").Append(frameTime).Append(" ms").ToString();
+
+            m_TimeSinceUpdate = 0f;
+            m_FrameCount = 0;
         }
     }
 }
