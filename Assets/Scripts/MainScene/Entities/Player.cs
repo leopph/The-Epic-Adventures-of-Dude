@@ -36,6 +36,8 @@ public class Player : Entity
     
     private ParticleSystem m_ParticleSystem;
 
+    private CameraShake m_CameraShake;
+
 
 
     private void Awake()
@@ -66,6 +68,8 @@ public class Player : Entity
 
         m_DashCooldownText = GetComponentInChildren<DashCooldownText>();
         m_DashCooldownText.gameObject.SetActive(false);
+
+        m_CameraShake = Camera.main.GetComponent<CameraShake>();
     }
 
 
@@ -191,7 +195,7 @@ public class Player : Entity
     public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
-        Camera.main.GetComponent<CameraShake>().Shake();
+        m_CameraShake.Shake();
     }
 
 

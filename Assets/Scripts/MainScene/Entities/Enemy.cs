@@ -10,6 +10,9 @@ public class Enemy : Entity
 {
     private GameObject m_Player;
     private Transform m_BodyTransform;
+    private float m_PlayerContactTime = 0f;
+    private float m_MinDamage = 20f;
+    private float m_MaxDamage = 30f;
 
 
 
@@ -57,7 +60,26 @@ public class Enemy : Entity
         }    
 
         else if (collision.gameObject.tag == "Player")
-            collision.gameObject.GetComponent<Player>().TakeDamage(Random.Range(30f, 35f));
+        {
+            collision.gameObject.GetComponent<Player>().TakeDamage(Random.Range(m_MinDamage, m_MaxDamage));
+            m_PlayerContactTime = 0f;
+        }
+    }
+
+
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            m_PlayerContactTime += Time.deltaTime;
+
+            if (m_PlayerContactTime > 1f)
+            {
+                collision.gameObject.GetComponent<Player>().TakeDamage(Random.Range(m_MinDamage, m_MaxDamage));
+                m_PlayerContactTime = 0f;
+            }
+        }
     }
 
 
