@@ -11,6 +11,9 @@ public class Bow : MonoBehaviour
     private List<Rigidbody2D> m_AmmoPool;
     private AudioManager m_AudioManager;
 
+    private float m_AttackSpeed = 5f;
+    private float m_TimeSinceAttack = 0f;
+
 
     void Start()
     {
@@ -33,7 +36,10 @@ public class Bow : MonoBehaviour
         if (PauseMenu.IsPaused)
             return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (m_TimeSinceAttack < 1 / m_AttackSpeed)
+            m_TimeSinceAttack += Time.deltaTime;
+
+        if (Input.GetMouseButtonDown(0) && m_TimeSinceAttack > 1 / m_AttackSpeed)
             Fire();
     }
 
@@ -51,6 +57,8 @@ public class Bow : MonoBehaviour
         ammo.velocity = m_ProjectileSpeed * direction;
 
         m_AudioManager.PlaySound("Arrow");
+
+        m_TimeSinceAttack = 0f;
     }
 
     private Rigidbody2D GetAmmoFromPool()
