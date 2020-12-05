@@ -115,7 +115,10 @@ public class Player : Entity
             }
 
             else if (m_DashState == DashState.Cooldown)
+            {
                 m_DashCooldownText.Set(Mathf.RoundToInt(m_DashCooldown));
+                m_AudioManager.Play("Cooldown");
+            }
         }
 
         if (m_DashState == DashState.Cooldown)
@@ -197,6 +200,7 @@ public class Player : Entity
         {
             m_Body.velocity = new Vector2(m_Body.velocity.x, 0);
             m_ParticleSystem.Play();
+            m_AudioManager.Play("JumpBoost");
         }
 
         m_Body.AddForce(new Vector2(0, m_JumpForce), ForceMode2D.Impulse);

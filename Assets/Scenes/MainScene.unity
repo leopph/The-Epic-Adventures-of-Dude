@@ -1301,15 +1301,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Sounds:
   - m_Name: Arrow
-    m_Clip: {fileID: 8300000, guid: 0bd05763df902854a80475577a26666a, type: 3}
+    m_Clip: {fileID: 8300000, guid: f8637edd19e8d5d428fd11827383fbcc, type: 3}
     m_Source: {fileID: 0}
-    m_Volume: 0.75
+    m_Volume: 0.6
     m_Pitch: 1
-    m_VolumeRandomness: 0.2
+    m_VolumeRandomness: 0.1
     m_PitchRandomness: 0.2
     m_isLooping: 0
   - m_Name: Explody
-    m_Clip: {fileID: 8300000, guid: 7dc48ac47b618424f8d032a339525809, type: 3}
+    m_Clip: {fileID: 0}
     m_Source: {fileID: 0}
     m_Volume: 0
     m_Pitch: 1.1
@@ -1319,9 +1319,9 @@ MonoBehaviour:
   - m_Name: Dash
     m_Clip: {fileID: 8300000, guid: cc6699269b4c1d44ea1e860518b9bb73, type: 3}
     m_Source: {fileID: 0}
-    m_Volume: 0.75
+    m_Volume: 0.5
     m_Pitch: 2
-    m_VolumeRandomness: 0.2
+    m_VolumeRandomness: 0.125
     m_PitchRandomness: 0.2
     m_isLooping: 0
   - m_Name: Ambient
@@ -1332,6 +1332,30 @@ MonoBehaviour:
     m_VolumeRandomness: 0
     m_PitchRandomness: 0
     m_isLooping: 1
+  - m_Name: DemonHurt
+    m_Clip: {fileID: 8300000, guid: b625c3727a45b1e4cac906448d9fddcf, type: 3}
+    m_Source: {fileID: 0}
+    m_Volume: 0.5
+    m_Pitch: 1
+    m_VolumeRandomness: 0.238
+    m_PitchRandomness: 0.278
+    m_isLooping: 0
+  - m_Name: Cooldown
+    m_Clip: {fileID: 8300000, guid: b8c6939b68749be45bd6510ca625c482, type: 3}
+    m_Source: {fileID: 0}
+    m_Volume: 1
+    m_Pitch: 1
+    m_VolumeRandomness: 0.05
+    m_PitchRandomness: 0.278
+    m_isLooping: 0
+  - m_Name: JumpBoost
+    m_Clip: {fileID: 8300000, guid: d6e4bce3d52bb5e4f8a023363eeece41, type: 3}
+    m_Source: {fileID: 0}
+    m_Volume: 1
+    m_Pitch: 1
+    m_VolumeRandomness: 0
+    m_PitchRandomness: 0.175
+    m_isLooping: 0
 --- !u!4 &1015817825
 Transform:
   m_ObjectHideFlags: 0

@@ -51,7 +51,10 @@ public class Enemy : Entity
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "PlayerProjectile")
+        {
             TakeDamage(collision.gameObject.GetComponent<Projectile>().Damage());
+            m_AudioManager.Play("DemonHurt");
+        }    
 
         else if (collision.gameObject.tag == "Player")
             collision.gameObject.GetComponent<Player>().TakeDamage(Random.Range(30f, 35f));
