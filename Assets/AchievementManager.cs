@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Assertions;
 using TMPro;
 using System.Collections.Generic;
 
@@ -11,7 +10,7 @@ public class AchievementManager : MonoBehaviour
     private static AchievementManager m_Instance;
     public static AchievementManager instance => m_Instance;
 
-    [SerializeField] private const string prefix = "ach_";
+    public const string prefix = "ach_";
 
     private Dictionary<string, string> m_Achievements = new Dictionary<string, string>
     {
@@ -21,7 +20,7 @@ public class AchievementManager : MonoBehaviour
     };
     public Dictionary<string, string> Achievements => m_Achievements;
 
-    [SerializeField] private Transform m_Popup;
+    public Transform m_Popup;
     private Animator m_Animator;
     private TextMeshProUGUI m_Text;
 
@@ -48,15 +47,21 @@ public class AchievementManager : MonoBehaviour
             m_Text = m_Popup.GetComponentsInChildren<TextMeshProUGUI>()[1];
         }
 
-        EventSystem.current.onEnemyKilled += HandleEnemyKilled;
-        EventSystem.current.onFallenToDeath += HandleFallenToDeath;
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.onEnemyKilled += HandleEnemyKilled;
+            EventSystem.current.onFallenToDeath += HandleFallenToDeath;
+        }
     }
 
 
     private void OnDestroy()
     {
-        EventSystem.current.onEnemyKilled -= HandleEnemyKilled;
-        EventSystem.current.onFallenToDeath -= HandleFallenToDeath;
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.onEnemyKilled -= HandleEnemyKilled;
+            EventSystem.current.onFallenToDeath -= HandleFallenToDeath;
+        }
     }
 
 
