@@ -42,13 +42,10 @@ public class FrameRateCounter : MonoBehaviour
 
         if (m_TimeSinceUpdate > 0.5f)
         {
-            //int fps = (int)(1f / Time.unscaledDeltaTime);
-            //double frameTime = System.Math.Round(Time.unscaledDeltaTime * 1000.0, 2);
-
             int fps = Mathf.RoundToInt(m_FrameCount / m_TimeSinceUpdate);
             double frameTime = System.Math.Round(1000 * m_TimeSinceUpdate / m_FrameCount, 2);
 
-            m_Text.text = m_StringBuilder.Clear().Append("FPS: ").AppendLine(fps.ToString()).Append("Frametime: ").Append(frameTime).Append(" ms").ToString();
+            m_Text.text = m_StringBuilder.Clear().AppendLine(SystemInfo.graphicsDeviceType.ToString()).Append(fps).AppendLine(" FPS").Append(frameTime).Append(" ms").ToString();
 
             m_TimeSinceUpdate = 0f;
             m_FrameCount = 0;
