@@ -1,30 +1,24 @@
 ﻿using UnityEngine;
 using UnityEngine.Assertions;
 using TMPro;
+using System.Collections.Generic;
 
 
 
 
 public class AchievementManager : MonoBehaviour
 {
-    [System.Serializable] public struct Achievement
-    {
-        public string name;
-        public string description;
-    }
-
-
-
-
     private static AchievementManager m_Instance;
 
-    [SerializeField] private Achievement[] m_Achievements;
-
     [SerializeField] private const string prefix = "ach_";
+
+    private Dictionary<string, string> m_Achievements = new Dictionary<string, string>();
 
     [SerializeField] private Transform m_Popup;
     private Animator m_Animator;
     private TextMeshProUGUI m_Text;
+
+    private int m_EnemiesKilled = 0;
 
 
 
@@ -41,14 +35,18 @@ public class AchievementManager : MonoBehaviour
             m_Instance = this;
             DontDestroyOnLoad(this);
 
-            for (int i = 0; i < m_Achievements.Length; i++)
-                if (!PlayerPrefs.HasKey(prefix + m_Achievements[i].name))
-                    PlayerPrefs.SetInt(prefix + m_Achievements[i].name, 0);
+            m_Achievements.Add("So it begins...", "Kill an enemy");
+            m_Achievements.Add("Massacre", "Kill 6 enemies");
+            m_Achievements.Add("Congratulations", "Fall to your death.");
 
-            EventSystem.current.OnEnemyKill += EnemyKilled;
+            foreach (string ach in m_Achievements.Keys)
+                if (!PlayerPrefs.HasKey(prefix + ach))
+                    PlayerPrefs.SetInt(prefix + ach, 0);
+
+            EventSystem.current.onEnemyKilled += HandleEnemyKilled;
+            EventSystem.current.onFallenToDeath += HandleFallenToDeath;
         }
     }
-
 
 
     private void Start()
@@ -59,30 +57,36 @@ public class AchievementManager : MonoBehaviour
     }
 
 
+    private void OnDestroy()
+    {
+        EventSystem.current.onEnemyKilled -= HandleEnemyKilled;
+        EventSystem.current.onFallenToDeath -= HandleFallenToDeath;
+    }
 
-    private void OnDestroy() { EventSystem.current.OnEnemyKill -= EnemyKilled; }
 
 
 
     public void AchievementAchieved(string name)
     {
-        for (int i = 0; i < m_Achievements.Length; i++)
-            if (m_Achievements[i].name == name)
-            {
-                if (PlayerPrefs.GetInt(prefix + name) == 0)
-                {
-                    m_Text.text = name;
-                    m_Animator.SetTrigger("Pop");
-                    PlayerPrefs.SetInt(prefix + name, 1);
-                }
+        if (!m_Achievements.ContainsKey(name))
+            Debug.LogError("NO ACHIEVEMENT WITH NAME \"" + name + "\"");
 
-                return;
-            }
-                
+        if (PlayerPrefs.GetInt(prefix + name) != 0)
+            return;
 
-        Debug.LogError("NO ACHIEVEMENT WITH NAME \"" + name + "\"");
+        m_Text.text = name;
+        m_Animator.SetTrigger("Pop");
+        PlayerPrefs.SetInt(prefix + name, 1);
     }
 
 
-    public void EnemyKilled() { AchievementAchieved("First Blood"); }
+    public void HandleEnemyKilled()
+    {
+        if (++m_EnemiesKilled == 1)
+            AchievementAchieved("So it begins...");
+        else if (m_EnemiesKilled == 6)
+            AchievementAchieved("Massacre");
+    }
+
+    public void HandleFallenToDeath() { AchievementAchieved("Congratulations"); }
 }

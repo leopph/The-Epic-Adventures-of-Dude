@@ -9,6 +9,9 @@ public class EventSystem : MonoBehaviour
     private static EventSystem m_Instance;
     public static EventSystem current => m_Instance;
 
+    public event Action onEnemyKilled;
+    public event Action onFallenToDeath;
+
 
     private void Awake()
     {
@@ -25,10 +28,16 @@ public class EventSystem : MonoBehaviour
     }
 
 
-    public event Action OnEnemyKill;
-    public void EnemyKill()
+    public void EnemyKilled()
     {
-        if (OnEnemyKill != null)
-            OnEnemyKill();
+        if (onEnemyKilled != null)
+            onEnemyKilled();
+    }
+
+
+    public void FallenToDeath()
+    {
+        if (onFallenToDeath != null)
+            onFallenToDeath();
     }
 }

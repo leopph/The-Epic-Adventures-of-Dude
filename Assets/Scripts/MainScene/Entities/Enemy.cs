@@ -86,7 +86,7 @@ public class Enemy : Entity
 
     public override void Die()
     {
-        EventSystem.current.EnemyKill();
+        EventSystem.current.EnemyKilled();
 
         foreach (Projectile projectile in GetComponentsInChildren<Projectile>())
                 projectile.Refresh();
