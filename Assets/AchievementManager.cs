@@ -9,10 +9,17 @@ using System.Collections.Generic;
 public class AchievementManager : MonoBehaviour
 {
     private static AchievementManager m_Instance;
+    public static AchievementManager instance => m_Instance;
 
     [SerializeField] private const string prefix = "ach_";
 
-    private Dictionary<string, string> m_Achievements = new Dictionary<string, string>();
+    private Dictionary<string, string> m_Achievements = new Dictionary<string, string>
+    {
+        { "So it begins...", "Kill an enemy" },
+        { "Massacre", "Kill 6 enemies" },
+        { "Congratulations", "Fall to your death." }
+    };
+    public Dictionary<string, string> Achievements => m_Achievements;
 
     [SerializeField] private Transform m_Popup;
     private Animator m_Animator;
@@ -25,35 +32,24 @@ public class AchievementManager : MonoBehaviour
 
     private void Awake()
     {
-        if (m_Instance != null)
-        {
-            if (m_Instance != this)
-                Destroy(this);
-        }
-        else
-        {
-            m_Instance = this;
-            DontDestroyOnLoad(this);
+        m_Instance = this;
 
-            m_Achievements.Add("So it begins...", "Kill an enemy");
-            m_Achievements.Add("Massacre", "Kill 6 enemies");
-            m_Achievements.Add("Congratulations", "Fall to your death.");
-
-            foreach (string ach in m_Achievements.Keys)
-                if (!PlayerPrefs.HasKey(prefix + ach))
-                    PlayerPrefs.SetInt(prefix + ach, 0);
-
-            EventSystem.current.onEnemyKilled += HandleEnemyKilled;
-            EventSystem.current.onFallenToDeath += HandleFallenToDeath;
-        }
+        foreach (string ach in m_Achievements.Keys)
+            if (!PlayerPrefs.HasKey(prefix + ach))
+                PlayerPrefs.SetInt(prefix + ach, 0);
     }
 
 
     private void Start()
     {
-        Assert.IsNotNull(m_Popup);
-        m_Animator = m_Popup.GetComponent<Animator>();
-        m_Text = m_Popup.GetComponentsInChildren<TextMeshProUGUI>()[1];
+        if (m_Popup != null)
+        {
+            m_Animator = m_Popup.GetComponent<Animator>();
+            m_Text = m_Popup.GetComponentsInChildren<TextMeshProUGUI>()[1];
+        }
+
+        EventSystem.current.onEnemyKilled += HandleEnemyKilled;
+        EventSystem.current.onFallenToDeath += HandleFallenToDeath;
     }
 
 
@@ -66,7 +62,7 @@ public class AchievementManager : MonoBehaviour
 
 
 
-    public void AchievementAchieved(string name)
+    private void AchievementAchieved(string name)
     {
         if (!m_Achievements.ContainsKey(name))
             Debug.LogError("NO ACHIEVEMENT WITH NAME \"" + name + "\"");
@@ -80,7 +76,7 @@ public class AchievementManager : MonoBehaviour
     }
 
 
-    public void HandleEnemyKilled()
+    private void HandleEnemyKilled()
     {
         if (++m_EnemiesKilled == 1)
             AchievementAchieved("So it begins...");
@@ -88,5 +84,5 @@ public class AchievementManager : MonoBehaviour
             AchievementAchieved("Massacre");
     }
 
-    public void HandleFallenToDeath() { AchievementAchieved("Congratulations"); }
+    private void HandleFallenToDeath() { AchievementAchieved("Congratulations"); }
 }

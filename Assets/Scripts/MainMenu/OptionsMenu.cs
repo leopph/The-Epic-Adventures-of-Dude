@@ -20,6 +20,8 @@ public class OptionsMenu : MonoBehaviour
 
         m_FPSText = GameObject.Find("FPSButton").GetComponentInChildren<TextMeshProUGUI>();
         m_FPSText.text = "FRAMERATE COUNTER: " + (PlayerPrefs.HasKey("FPSCounter") && PlayerPrefs.GetInt("FPSCounter") == 1 ? "ON" : "OFF");
+
+        gameObject.SetActive(false);
     }
 
 
