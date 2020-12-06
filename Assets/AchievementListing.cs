@@ -27,7 +27,13 @@ public class AchievementListing : MonoBehaviour
             entry.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = ach.Key;
             entry.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = ach.Value;
 
-            entry.GetComponent<Image>().color = PlayerPrefs.HasKey(AchievementManager.prefix + ach.Key) && PlayerPrefs.GetInt(AchievementManager.prefix + ach.Key) == 1 ? m_UnlockedColor : m_LockedColor;
+            if (PlayerPrefs.HasKey(AchievementManager.prefix + ach.Key) && PlayerPrefs.GetInt(AchievementManager.prefix + ach.Key) == 1)
+                entry.GetComponent<Image>().color = m_UnlockedColor;
+            else
+            {
+                entry.GetComponent<Image>().color = m_LockedColor;
+                entry.transform.GetChild(2).gameObject.SetActive(false);
+            }
 
             RectTransform rect = entry.GetComponent<RectTransform>();
             rect.anchoredPosition += new Vector2(0, -count * rect.rect.height);
