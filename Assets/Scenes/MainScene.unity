@@ -3771,8 +3771,8 @@ GameObject:
   - component: {fileID: 1324153480}
   - component: {fileID: 1324153482}
   - component: {fileID: 1324153484}
-  - component: {fileID: 1324153481}
   - component: {fileID: 1324153483}
+  - component: {fileID: 1324153481}
   - component: {fileID: 1324153485}
   m_Layer: 0
   m_Name: TestEnemy
@@ -3789,7 +3789,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1324153479}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.6, y: -2.27, z: 0}
+  m_LocalPosition: {x: -7.42, y: -2.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1823034360}
@@ -3810,6 +3810,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Speed: 2
   m_VerticalMovement: 0
+  m_SpriteRenderer: {fileID: 1823034361}
 --- !u!114 &1324153482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3851,7 +3852,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.54675436, y: -0.23252797}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -3862,7 +3863,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.113122, y: 1.9678178}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
 --- !u!50 &1324153484
 Rigidbody2D:
@@ -3897,8 +3898,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ec3a59965480814e9686b8c24bef378, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IdleWalkDistance: 3
-  m_ChaseRange: 2
+  m_IdleWalkDistance: 5
+  m_ChaseRange: 3.5
   m_AttackRange: 0
   m_MaxDistanceFromStart: 5
 --- !u!1 &1490953253

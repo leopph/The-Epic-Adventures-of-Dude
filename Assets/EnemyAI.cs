@@ -33,13 +33,13 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        if (m_State != State.Retreating && Vector3.Distance(transform.position, m_StartingPosition) > m_MaxDistanceFromStart)
+        if (m_State != State.Retreating && Mathf.Abs(transform.position.x - m_StartingPosition.x) > m_MaxDistanceFromStart)
             ChangeState(State.Retreating);
 
         switch(m_State)
         {
             case State.Idle:
-                if (Vector3.Distance(transform.position, m_Player.transform.position) <= m_ChaseRange)
+                if (Mathf.Abs(transform.position.x - m_Player.transform.position.x) <= m_ChaseRange && transform.position.x + m_ChaseRange <= m_StartingPosition.x + m_IdleWalkDistance && transform.position.x - m_ChaseRange >= m_StartingPosition.x - m_IdleWalkDistance)
                     ChangeState(State.Chasing);
 
                 else if (!m_Pathfinding.moving)
@@ -52,7 +52,7 @@ public class EnemyAI : MonoBehaviour
                 break;
 
             case State.Chasing:
-                if (Vector3.Distance(m_Player.transform.position, transform.position) < m_AttackRange)
+                if (Mathf.Abs(m_Player.transform.position.x - transform.position.x) <= m_AttackRange)
                     ChangeState(State.Combat);
 
                 else if (!m_Pathfinding.moving)
@@ -80,6 +80,5 @@ public class EnemyAI : MonoBehaviour
     {
         m_Pathfinding.StopMoving();
         m_State = newState;
-        Debug.Log(m_State);
     }
 }

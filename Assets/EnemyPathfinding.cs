@@ -21,6 +21,10 @@ public class EnemyPathfinding : MonoBehaviour
     private bool m_Moving = false;
     public bool moving => m_Moving;
 
+    private ContactPoint2D[] m_CollisionPoints = new ContactPoint2D[2];
+
+    public SpriteRenderer m_SpriteRenderer;
+
 
 
 
@@ -36,24 +40,57 @@ public class EnemyPathfinding : MonoBehaviour
         if (m_Path == null)
             return;
 
+        if (m_CurrentWaypoint < m_Path.vectorPath.Count && Vector2.Distance(transform.position, m_Path.vectorPath[m_CurrentWaypoint]) < m_NextWaypointDistance)
+            m_CurrentWaypoint++;
+
+        Vector3 velocity = Vector3.zero;
+
         if (m_CurrentWaypoint >= m_Path.vectorPath.Count)
         {
-            if (Mathf.Approximately(transform.position.x, m_Target.x))
+            if (transform.position.x == m_Target.x)
+            {
                 StopMoving();
+            }
             else
             {
                 if (Mathf.Abs(transform.position.x - m_Target.x) < m_Speed * Time.deltaTime)
+                {
                     transform.position = new Vector3(m_Target.x, transform.position.y, transform.position.z);
+                }
                 else
-                    transform.Translate(new Vector2(m_Target.x > transform.position.x ? 1 : -1, 0) * m_Speed * Time.deltaTime);
+                {
+                    velocity.x = m_Target.x > transform.position.x ? 1 : -1;
+                }
             }
-            return;
+        }
+        else
+        {
+            velocity = new Vector2(m_Path.vectorPath[m_CurrentWaypoint].x - transform.position.x, 0).normalized;
         }
 
-        transform.Translate(new Vector2(m_Path.vectorPath[m_CurrentWaypoint].x - transform.position.x, 0).normalized * m_Speed * Time.deltaTime);
+        transform.Translate(velocity * m_Speed * Time.deltaTime);
 
-        if (Vector2.Distance(transform.position, m_Path.vectorPath[m_CurrentWaypoint]) < m_NextWaypointDistance)
-            m_CurrentWaypoint++;
+        if (velocity.x > 0)
+            m_SpriteRenderer.flipX = true;
+        else if (velocity.x < 0)
+            m_SpriteRenderer.flipX = false;
+    }
+
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.contactCount > m_CollisionPoints.Length)
+            m_CollisionPoints = new ContactPoint2D[m_CollisionPoints.Length * 2];
+
+        collision.GetContacts(m_CollisionPoints);
+
+        foreach (ContactPoint2D p in m_CollisionPoints)
+            if (p.point.y > collision.otherCollider.bounds.min.y)
+            {
+                StopMoving();
+                return;
+            }
     }
 
 
@@ -87,7 +124,7 @@ public class EnemyPathfinding : MonoBehaviour
 
 
 
-    public void TargetUpdate() { m_Target = m_TrackedTarget.position; Debug.Log(m_Target); }
+    public void TargetUpdate() { m_Target = m_TrackedTarget.position; }
 
 
 
