@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 public class EnemyAttack : MonoBehaviour
 {
-    private Rigidbody2D m_Projectile;
+    public Rigidbody2D m_Projectile;
     private List<Rigidbody2D> m_ProjectilePool;
     public float m_ProjectileSpeed;
     public float m_PoolSize;

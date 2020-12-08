@@ -361,6 +361,10 @@ GameObject:
   - component: {fileID: 4055011731851598311}
   - component: {fileID: 4163735474619654328}
   - component: {fileID: 268396212983499427}
+  - component: {fileID: 4492981214484244008}
+  - component: {fileID: 5526101564058655865}
+  - component: {fileID: 6460756732317152033}
+  - component: {fileID: 407108672912274171}
   m_Layer: 0
   m_Name: Demon1
   m_TagString: Untagged
@@ -452,6 +456,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426272c30ec33294c96a43925044d2e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HurtSound: DemonHurt
+--- !u!114 &4492981214484244008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7511000144350198784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ec3a59965480814e9686b8c24bef378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IdleWalkDistance: 0
+  m_ChaseRange: 0
+  m_AttackRange: 0
+  m_MaxDistanceFromStart: 10
+--- !u!114 &5526101564058655865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7511000144350198784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b21fe8219fd26fe429137eb24318dbf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ProjectileSpeed: 0
+  m_PoolSize: 0
+  m_AttackSpeed: 1
+  m_Melee: 1
+  m_MinMeleeDamage: 5
+  m_MaxMeleeDamage: 25
+--- !u!114 &6460756732317152033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7511000144350198784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a58eebafc1f29499a0503aa076340b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Speed: 0
+  m_VerticalMovement: 0
+  m_SpriteRenderer: {fileID: 7498265368979620718}
+--- !u!114 &407108672912274171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7511000144350198784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
 --- !u!1 &8275842776760942058
 GameObject:
   m_ObjectHideFlags: 0

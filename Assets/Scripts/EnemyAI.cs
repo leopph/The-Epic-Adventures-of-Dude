@@ -26,13 +26,14 @@ public class EnemyAI : MonoBehaviour
     {
         Assert.IsTrue(m_IdleWalkDistance <= m_MaxDistanceFromStart, "MAX WALK DISTANCE IS BIGGER THAN THE ALLOWED MAX DISTANCE FROM SPAWN");
 
-        m_StartingPosition = transform.position;
         m_Pathfinding = GetComponent<EnemyPathfinding>();
         m_EnemyAttack = GetComponent<EnemyAttack>();
     }
 
     private void Start()
     {
+        m_StartingPosition = transform.position;
+
         m_Animator = GetComponentInChildren<Animator>();
         m_Player = GameObject.Find("Dood").GetComponent<Player>();
     }

@@ -196,6 +196,7 @@ public class Player : Entity
     {
         base.TakeDamage(damage);
         m_CameraShake.Shake();
+        m_AudioManager.PlaySound("DoodHurt");
     }
 
 

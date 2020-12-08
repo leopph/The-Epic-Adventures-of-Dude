@@ -12,6 +12,8 @@ public class Enemy : Entity
     private float m_MinDamage = 20f;
     private float m_MaxDamage = 30f;
 
+    public string HurtSound;
+
 
 
 
@@ -37,7 +39,7 @@ public class Enemy : Entity
         if (collision.gameObject.tag == "PlayerProjectile")
         {
             TakeDamage(collision.gameObject.GetComponent<Projectile>().Damage());
-            m_AudioManager.PlaySound("DemonHurt");
+            m_AudioManager.PlaySound(HurtSound);
         }    
 
         /*else if (collision.gameObject.tag == "Player")

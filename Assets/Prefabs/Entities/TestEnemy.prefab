@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20.40039, y: -436.42694}
+  m_AnchoredPosition: {x: 0, y: 0.69999695}
+  m_SizeDelta: {x: -20.40039, y: -27.897781}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &522906842706660305
 CanvasRenderer:
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8509804, g: 0, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.4785439, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -323,6 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 426272c30ec33294c96a43925044d2e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HurtSound: SunflowerHurt
 --- !u!1 &3747665384393541011
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,10 +459,10 @@ RectTransform:
   m_Father: {fileID: 9163434294174105478}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1049, y: 590}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -1.25}
+  m_SizeDelta: {x: 0, y: -49.181625}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8645210625307324830
 MonoBehaviour:
@@ -561,8 +562,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.23}
-  m_SizeDelta: {x: 1046.4985, y: 232.28918}
+  m_AnchoredPosition: {x: -0.6934, y: 1.1073}
+  m_SizeDelta: {x: 584.2024, y: 150.5441}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3448116724406047567
 Canvas:
