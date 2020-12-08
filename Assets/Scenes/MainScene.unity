@@ -3774,6 +3774,7 @@ GameObject:
   - component: {fileID: 1324153483}
   - component: {fileID: 1324153481}
   - component: {fileID: 1324153485}
+  - component: {fileID: 1324153486}
   m_Layer: 0
   m_Name: TestEnemy
   m_TagString: Untagged
@@ -3900,8 +3901,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IdleWalkDistance: 5
   m_ChaseRange: 3.5
-  m_AttackRange: 0
-  m_MaxDistanceFromStart: 5
+  m_AttackRange: 1.5
+  m_MaxDistanceFromStart: 15
+--- !u!114 &1324153486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324153479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b21fe8219fd26fe429137eb24318dbf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AttackSpeed: 2
 --- !u!1 &1490953253
 GameObject:
   m_ObjectHideFlags: 0
@@ -4958,6 +4972,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1823034360}
   - component: {fileID: 1823034361}
+  - component: {fileID: 1823034362}
   m_Layer: 0
   m_Name: graphics
   m_TagString: Untagged
@@ -5029,6 +5044,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1823034362
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823034359}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ffe412579355d5140afe89526603a03b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1825847913
 GameObject:
   m_ObjectHideFlags: 0
