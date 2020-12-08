@@ -50,6 +50,7 @@ public class EnemyAttack : MonoBehaviour
     private void Start()
     {
         m_Animator = GetComponentInChildren<Animator>();
+        m_Animator.keepAnimatorControllerStateOnDisable = true;
     }
 
 

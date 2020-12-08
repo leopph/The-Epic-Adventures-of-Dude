@@ -8,9 +8,9 @@
 
 public class Enemy : Entity
 {
-    private float m_PlayerContactTime = 0f;
+    /*private float m_PlayerContactTime = 0f;
     private float m_MinDamage = 20f;
-    private float m_MaxDamage = 30f;
+    private float m_MaxDamage = 30f;*/
 
     public string HurtSound;
 
