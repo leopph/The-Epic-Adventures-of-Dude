@@ -80,6 +80,9 @@ public class EnemyPathfinding : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "PlayerProjectile")
+            return;
+
         if (collision.contactCount > m_CollisionPoints.Length)
             m_CollisionPoints = new ContactPoint2D[m_CollisionPoints.Length * 2];
 

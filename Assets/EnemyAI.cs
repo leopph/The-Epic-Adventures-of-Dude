@@ -39,7 +39,7 @@ public class EnemyAI : MonoBehaviour
         switch(m_State)
         {
             case State.Idle:
-                if (Mathf.Abs(transform.position.x - m_Player.transform.position.x) <= m_ChaseRange && transform.position.x + m_ChaseRange <= m_StartingPosition.x + m_IdleWalkDistance && transform.position.x - m_ChaseRange >= m_StartingPosition.x - m_IdleWalkDistance)
+                if (Mathf.Abs(transform.position.x - m_Player.transform.position.x) <= m_ChaseRange && Mathf.Abs(m_StartingPosition.x - m_Player.transform.position.x) <= m_StartingPosition.x + m_MaxDistanceFromStart)
                     ChangeState(State.Chasing);
 
                 else if (!m_Pathfinding.moving)
@@ -80,5 +80,6 @@ public class EnemyAI : MonoBehaviour
     {
         m_Pathfinding.StopMoving();
         m_State = newState;
+        Debug.Log(newState);
     }
 }
