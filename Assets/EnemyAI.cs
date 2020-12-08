@@ -85,7 +85,7 @@ public class EnemyAI : MonoBehaviour
                     else
                     {
                         if (!m_EnemyAttack.attacking)
-                            m_EnemyAttack.Attack();
+                            m_EnemyAttack.Attack(m_Player);
                     }
                     break;
                 }
